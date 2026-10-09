@@ -7,6 +7,11 @@ import { MailModule } from './modules/notifications/mail.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ProductsModule } from './modules/products/products.module';
 import { CategoriesModule } from './modules/categories/categories.module';
+import { BrandsModule } from './modules/brands/brands.module';
+import { ReviewsModule } from './modules/reviews/reviews.module';
+import { AddonsModule } from './modules/addons/addons.module';
+import { VouchersModule } from './modules/vouchers/vouchers.module';
+import { WarrantyModule } from './modules/warranty/warranty.module';
 import { OrdersModule } from './modules/orders/orders.module';
 import { PaymentsModule } from './modules/payments/payments.module';
 import { ShippingModule } from './modules/shipping/shipping.module';
@@ -24,6 +29,11 @@ import { ShippingModule } from './modules/shipping/shipping.module';
     AuthModule,
     ProductsModule,
     CategoriesModule,
+    BrandsModule,
+    ReviewsModule,
+    AddonsModule,
+    VouchersModule,
+    WarrantyModule,
     OrdersModule,
     PaymentsModule,
     ShippingModule,

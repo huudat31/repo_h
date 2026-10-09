@@ -40,16 +40,17 @@ enum ShippingCarrier {
 }
 
 model User {
-  id        String    @id @default(uuid())
-  email     String    @unique
+  id        String          @id @default(uuid())
+  email     String          @unique
   password  String
   fullName  String
   phone     String?
-  role      Role      @default(CUSTOMER)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  role      Role            @default(CUSTOMER)
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
   orders    Order[]
   addresses Address[]
+  reviews   ProductReview[]
 
   @@map("users")
 }
@@ -71,6 +72,18 @@ model Address {
   user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("addresses")
+}
+
+model Brand {
+  id        String    @id @default(uuid())
+  name      String    @unique
+  slug      String    @unique
+  logoUrl   String?
+  origin    String?   // Xuất xứ: Nhật Bản, Hà Lan, Việt Nam...
+  products  Product[]
+  createdAt DateTime  @default(now())
+
+  @@map("brands")
 }
 
 model Category {
@@ -101,17 +114,26 @@ model Product {
   stock            Int              @default(0)
   images           String[]
   isPublished      Boolean          @default(true)
-  // Lưu trữ thuộc tính kỹ thuật linh hoạt dưới dạng JSONB (RAM, CPU, Dung lượng, Màn hình, etc.)
+  // Lưu trữ thuộc tính kỹ thuật linh hoạt: công suất, dung tích, inverter, kích thước...
   specs            Json?            @default("{}")
   categoryId       String
   category         Category         @relation(fields: [categoryId], references: [id])
+  brandId          String?
+  brand            Brand?           @relation(fields: [brandId], references: [id], onDelete: SetNull)
+  warrantyMonths   Int              @default(12) // Thời gian bảo hành tiêu chuẩn (tháng)
+  media360Urls     String[]         @default([]) // Danh sách frame ảnh quay 360 độ
+  videoUrl         String?          // Video trải nghiệm thực tế
+  crossSellIds     String[]         @default([]) // ID các sản phẩm/phụ kiện gợi ý mua kèm
   variants         ProductVariant[]
   orderItems       OrderItem[]
+  reviews          ProductReview[]
+  warrantyRecords  WarrantyRecord[]
   createdAt        DateTime         @default(now())
   updatedAt        DateTime         @updatedAt
 
   @@index([slug])
   @@index([categoryId])
+  @@index([brandId])
   @@map("products")
 }
 
@@ -119,7 +141,7 @@ model ProductVariant {
   id        String   @id @default(uuid())
   productId String
   product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-  name      String
+  name      String   // Màu sắc, Dung tích (5L/8L), Công suất (1.0HP/1.5HP)
   sku       String   @unique
   price     Float
   stock     Int      @default(0)
@@ -128,6 +150,69 @@ model ProductVariant {
   updatedAt DateTime @updatedAt
 
   @@map("product_variants")
+}
+
+model ProductReview {
+  id         String   @id @default(uuid())
+  productId  String
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  authorName String
+  rating     Int      @default(5) // 1 - 5 sao
+  comment    String
+  images     String[] @default([]) // Ảnh thực tế từ người mua
+  isVerified Boolean  @default(true) // Xác nhận đã mua hàng
+  createdAt  DateTime @default(now())
+
+  @@index([productId])
+  @@map("product_reviews")
+}
+
+model ServiceAddon {
+  id          String   @id @default(uuid())
+  name        String   // Dịch vụ lắp đặt tận nơi, Gói bảo hành mở rộng 24 tháng
+  code        String   @unique
+  price       Float
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  @@map("service_addons")
+}
+
+model Voucher {
+  id            String    @id @default(uuid())
+  code          String    @unique
+  title         String
+  discountType  String    // 'PERCENT' | 'FIXED'
+  discountValue Float
+  minOrderValue Float     @default(0)
+  maxDiscount   Float?
+  usageLimit    Int       @default(100)
+  usedCount     Int       @default(0)
+  validFrom     DateTime  @default(now())
+  validTo       DateTime
+  isActive      Boolean   @default(true)
+
+  @@map("vouchers")
+}
+
+model WarrantyRecord {
+  id            String    @id @default(uuid())
+  serialNumber  String    @unique // Mã Serial / IMEI dán trên máy
+  productId     String
+  product       Product   @relation(fields: [productId], references: [id])
+  orderId       String?
+  customerPhone String
+  customerName  String
+  startDate     DateTime  @default(now())
+  endDate       DateTime
+  status        String    @default("ACTIVE") // ACTIVE | EXPIRED | REPAIRING
+
+  @@index([customerPhone])
+  @@index([serialNumber])
+  @@map("warranty_records")
 }
 
 model Order {
@@ -141,7 +226,10 @@ model Order {
   totalAmount          Float
   shippingFee          Float                @default(0)
   discountAmount       Float                @default(0)
+  addonAmount          Float                @default(0) // Phí dịch vụ đi kèm
   finalAmount          Float
+  selectedAddons       Json?                @default("[]") // Danh sách dịch vụ đi kèm đã chọn
+  voucherCode          String?
   status               OrderStatus          @default(PENDING)
   paymentProvider      PaymentProvider      @default(COD)
   paymentStatus        PaymentStatus        @default(PENDING)
