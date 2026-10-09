@@ -1,0 +1,208 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  ADMIN
+  CUSTOMER
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PROCESSING
+  SHIPPING
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+  REFUNDED
+}
+
+enum PaymentProvider {
+  VNPAY
+  MOMO
+  COD
+}
+
+enum ShippingCarrier {
+  GHN
+  GHTK
+}
+
+model User {
+  id        String    @id @default(uuid())
+  email     String    @unique
+  password  String
+  fullName  String
+  phone     String?
+  role      Role      @default(CUSTOMER)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  orders    Order[]
+  addresses Address[]
+
+  @@map("users")
+}
+
+model Address {
+  id            String   @id @default(uuid())
+  userId        String
+  recipientName String
+  phone         String
+  provinceName  String
+  provinceId    Int
+  districtName  String
+  districtId    Int
+  wardName      String
+  wardCode      String
+  detailAddress String
+  isDefault     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("addresses")
+}
+
+model Category {
+  id          String     @id @default(uuid())
+  name        String
+  slug        String     @unique
+  description String?
+  imageUrl    String?
+  parentId    String?
+  parent      Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id])
+  children    Category[] @relation("CategoryHierarchy")
+  products    Product[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@map("categories")
+}
+
+model Product {
+  id               String           @id @default(uuid())
+  name             String
+  slug             String           @unique
+  sku              String           @unique
+  shortDescription String?
+  description      String?
+  price            Float
+  originalPrice    Float?
+  stock            Int              @default(0)
+  images           String[]
+  isPublished      Boolean          @default(true)
+  // Lưu trữ thuộc tính kỹ thuật linh hoạt dưới dạng JSONB (RAM, CPU, Dung lượng, Màn hình, etc.)
+  specs            Json?            @default("{}")
+  categoryId       String
+  category         Category         @relation(fields: [categoryId], references: [id])
+  variants         ProductVariant[]
+  orderItems       OrderItem[]
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  @@index([slug])
+  @@index([categoryId])
+  @@map("products")
+}
+
+model ProductVariant {
+  id        String   @id @default(uuid())
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  name      String
+  sku       String   @unique
+  price     Float
+  stock     Int      @default(0)
+  specs     Json?    @default("{}")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("product_variants")
+}
+
+model Order {
+  id                   String               @id @default(uuid())
+  orderCode            String               @unique
+  userId               String?
+  user                 User?                @relation(fields: [userId], references: [id], onDelete: SetNull)
+  recipientName        String
+  recipientPhone       String
+  shippingAddress      Json
+  totalAmount          Float
+  shippingFee          Float                @default(0)
+  discountAmount       Float                @default(0)
+  finalAmount          Float
+  status               OrderStatus          @default(PENDING)
+  paymentProvider      PaymentProvider      @default(COD)
+  paymentStatus        PaymentStatus        @default(PENDING)
+  shippingCarrier      ShippingCarrier?
+  shippingTrackingCode String?
+  notes                String?
+  items                OrderItem[]
+  payments             PaymentTransaction[]
+  shippingOrders       ShippingOrder[]
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+
+  @@index([orderCode])
+  @@map("orders")
+}
+
+model OrderItem {
+  id          String   @id @default(uuid())
+  orderId     String
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId   String?
+  product     Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  productName String
+  sku         String
+  price       Float
+  quantity    Int
+  specs       Json?    @default("{}")
+  createdAt   DateTime @default(now())
+
+  @@map("order_items")
+}
+
+model PaymentTransaction {
+  id            String          @id @default(uuid())
+  orderId       String
+  order         Order           @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  provider      PaymentProvider
+  transactionNo String?
+  amount        Float
+  status        PaymentStatus   @default(PENDING)
+  bankCode      String?
+  responseCode  String?
+  payload       Json?
+  createdAt     DateTime        @default(now())
+
+  @@index([orderId])
+  @@map("payment_transactions")
+}
+
+model ShippingOrder {
+  id                 String          @id @default(uuid())
+  orderId            String
+  order              Order           @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  carrier            ShippingCarrier
+  trackingCode       String?         @unique
+  fee                Float
+  expectedDeliveryAt DateTime?
+  status             String          @default("CREATED")
+  rawResponse        Json?
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+
+  @@map("shipping_orders")
+}
