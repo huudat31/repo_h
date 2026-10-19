@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { fetchApi } from '@/lib/api';
 import { formatPrice } from '@/lib/formatters';
@@ -119,20 +120,31 @@ export default async function ProductDetailPage({ params }: { params: { slug: st
   return (
     <div className="container mx-auto px-4 py-8 space-y-12">
       {/* Breadcrumb */}
-      <div className="text-xs text-gray-500 flex items-center gap-1.5">
-        <a href="/" className="hover:text-blue-600">Trang chủ</a>
+      <div className="text-xs text-gray-500 flex items-center gap-1.5 flex-wrap">
+        <Link href="/" className="hover:text-blue-600 transition">Trang chủ</Link>
         <span>/</span>
-        <a href="/products" className="hover:text-blue-600">Sản phẩm</a>
+        <Link href="/products" className="hover:text-blue-600 transition">Sản phẩm</Link>
         <span>/</span>
-        {product.brand && (
+        {product.category && (
           <>
-            <a href={`/products?brandSlug=${product.brand.slug}`} className="hover:text-blue-600">
-              {product.brand.name}
-            </a>
+            <Link
+              href={`/products?categoryId=${product.category.slug || product.category.id}`}
+              className="hover:text-blue-600 transition"
+            >
+              {product.category.name}
+            </Link>
             <span>/</span>
           </>
         )}
-        <span className="text-gray-800 font-medium truncate max-w-sm">{product.name}</span>
+        {product.brand && (
+          <>
+            <Link href={`/products?brandSlug=${product.brand.slug}`} className="hover:text-blue-600 transition">
+              {product.brand.name}
+            </Link>
+            <span>/</span>
+          </>
+        )}
+        <span className="text-gray-800 font-semibold truncate max-w-xs">{product.name}</span>
       </div>
 
       {/* Main detail grid */}

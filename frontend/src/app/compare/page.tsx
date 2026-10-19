@@ -184,8 +184,10 @@ export default function ComparePage() {
                         <Trash2 className="w-4 h-4" />
                       </button>
 
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={img} alt={p.name} className="w-28 h-28 object-contain mb-3" />
+                      <Link href={`/products/${p.slug}`} className="mb-3 hover:opacity-80 transition block">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={img} alt={p.name} className="w-28 h-28 object-contain" />
+                      </Link>
 
                       {p.brand && (
                         <span className="text-[11px] font-bold text-blue-600 uppercase tracking-wider mb-1">

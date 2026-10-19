@@ -3,6 +3,7 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ComparisonBar from '@/components/comparison/ComparisonBar';
+import { AuthProvider } from '@/lib/auth-context';
 
 export const metadata: Metadata = {
   title: 'TechStore - Thiết Bị Công Nghệ & Điện Gia Dụng Chính Hãng',
@@ -25,10 +26,12 @@ export default function RootLayout({
   return (
     <html lang="vi">
       <body className="min-h-screen flex flex-col justify-between bg-gray-50 text-slate-800 antialiased pb-12">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <ComparisonBar />
-        <Footer />
+        <AuthProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <ComparisonBar />
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );
