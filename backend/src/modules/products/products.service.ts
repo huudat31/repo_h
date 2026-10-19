@@ -2,10 +2,13 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { RedisService } from '../redis/redis.service';
 import { SearchService } from '../search/search.service';
+import { CreateProductDto } from './dto/create-product.dto';
+import { UpdateProductDto } from './dto/update-product.dto';
 
 export interface ProductQueryDto {
   search?: string;
   categoryId?: string;
+  categorySlug?: string;
   brandSlug?: string;
   brandId?: string;
   hasInverter?: boolean;
@@ -49,8 +52,14 @@ export class ProductsService {
       ];
     }
 
-    if (query?.categoryId) {
-      where.categoryId = query.categoryId;
+    if (query?.categorySlug) {
+      where.category = { slug: query.categorySlug };
+    } else if (query?.categoryId) {
+      if (query.categoryId.length === 36 && query.categoryId.includes('-')) {
+        where.categoryId = query.categoryId;
+      } else {
+        where.category = { slug: query.categoryId };
+      }
     }
 
     if (query?.brandId) {
@@ -178,6 +187,23 @@ export class ProductsService {
     return result;
   }
 
+  async findById(id: string) {
+    const product = await this.prisma.product.findUnique({
+      where: { id },
+      include: {
+        category: true,
+        brand: true,
+        variants: true,
+      },
+    });
+
+    if (!product) {
+      throw new NotFoundException(`Không tìm thấy sản phẩm có id: ${id}`);
+    }
+
+    return product;
+  }
+
   async compare(productIds: string[]) {
     if (!productIds || productIds.length === 0) {
       return [];
@@ -205,5 +231,106 @@ export class ProductsService {
       products,
       specKeys: allSpecKeys,
     };
+  }
+
+  private slugify(text: string): string {
+    return text
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[đĐ]/g, 'd')
+      .replace(/[^a-z0-9 -]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .trim();
+  }
+
+  async create(dto: CreateProductDto) {
+    let slug = dto.slug ? this.slugify(dto.slug) : this.slugify(dto.name);
+    const existing = await this.prisma.product.findUnique({ where: { slug } });
+    if (existing) {
+      slug = `${slug}-${Date.now().toString().slice(-4)}`;
+    }
+
+    const { variants, ...productData } = dto;
+
+    const product = await this.prisma.product.create({
+      data: {
+        ...productData,
+        slug,
+        specs: (productData.specs as any) || {},
+        variants:
+          variants && variants.length > 0
+            ? {
+                create: variants.map((v) => ({
+                  name: v.name,
+                  sku: v.sku,
+                  price: v.price,
+                  stock: v.stock,
+                  specs: (v.specs as any) || {},
+                })),
+              }
+            : undefined,
+      },
+      include: {
+        category: true,
+        brand: true,
+        variants: true,
+      },
+    });
+
+    try {
+      await this.searchService.indexProduct(product);
+    } catch {
+      // Ignored
+    }
+
+    return product;
+  }
+
+  async update(id: string, dto: UpdateProductDto) {
+    const existing = await this.prisma.product.findUnique({ where: { id } });
+    if (!existing) {
+      throw new NotFoundException('Sản phẩm không tồn tại');
+    }
+
+    const { variants, ...productData } = dto;
+
+    const product = await this.prisma.product.update({
+      where: { id },
+      data: {
+        ...(productData as any),
+        ...(productData.specs ? { specs: productData.specs as any } : {}),
+      },
+      include: {
+        category: true,
+        brand: true,
+        variants: true,
+      },
+    });
+
+    try {
+      await this.searchService.indexProduct(product);
+    } catch {
+      // Ignored
+    }
+
+    return product;
+  }
+
+  async delete(id: string) {
+    const existing = await this.prisma.product.findUnique({ where: { id } });
+    if (!existing) {
+      throw new NotFoundException('Sản phẩm không tồn tại');
+    }
+
+    await this.prisma.product.delete({ where: { id } });
+    try {
+      await this.searchService.removeProduct(id);
+    } catch {
+      // Ignored
+    }
+
+    return { success: true, message: 'Đã xóa sản phẩm thành công' };
   }
 }

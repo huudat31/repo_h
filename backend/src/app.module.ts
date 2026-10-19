@@ -15,6 +15,8 @@ import { WarrantyModule } from './modules/warranty/warranty.module';
 import { OrdersModule } from './modules/orders/orders.module';
 import { PaymentsModule } from './modules/payments/payments.module';
 import { ShippingModule } from './modules/shipping/shipping.module';
+import { AddressesModule } from './modules/addresses/addresses.module';
+import { AdminModule } from './modules/admin/admin.module';
 
 @Module({
   imports: [
@@ -37,6 +39,8 @@ import { ShippingModule } from './modules/shipping/shipping.module';
     OrdersModule,
     PaymentsModule,
     ShippingModule,
+    AddressesModule,
+    AdminModule,
   ],
 })
 export class AppModule {}

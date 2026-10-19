@@ -20,8 +20,14 @@ export class PaymentsController {
   @Get('vnpay/return')
   async vnpayReturn(@Query() query: Record<string, any>, @Res() res: Response) {
     const result = await this.paymentsService.handleVnpayReturn(query);
-    const redirectUrl = `http://localhost:3000/checkout/success?orderCode=${result.orderCode}&status=${result.success ? 'success' : 'failed'}&message=${encodeURIComponent(result.message)}`;
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+    const redirectUrl = `${appUrl}/checkout/success?orderCode=${result.orderCode}&status=${result.success ? 'success' : 'failed'}&message=${encodeURIComponent(result.message)}`;
     return res.redirect(redirectUrl);
+  }
+
+  @Get('vnpay/ipn')
+  async vnpayIpn(@Query() query: Record<string, any>) {
+    return this.paymentsService.handleVnpayIpn(query);
   }
 
   @Post('momo/ipn')

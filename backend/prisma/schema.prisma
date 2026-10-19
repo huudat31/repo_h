@@ -46,6 +46,7 @@ model User {
   fullName  String
   phone     String?
   role      Role            @default(CUSTOMER)
+  refreshToken String?
   createdAt DateTime        @default(now())
   updatedAt DateTime        @updatedAt
   orders    Order[]
@@ -209,6 +210,7 @@ model WarrantyRecord {
   startDate     DateTime  @default(now())
   endDate       DateTime
   status        String    @default("ACTIVE") // ACTIVE | EXPIRED | REPAIRING
+  claimNote     String?   // Ghi chú tiếp nhận yêu cầu bảo hành / đổi trả
 
   @@index([customerPhone])
   @@index([serialNumber])
@@ -235,6 +237,7 @@ model Order {
   paymentStatus        PaymentStatus        @default(PENDING)
   shippingCarrier      ShippingCarrier?
   shippingTrackingCode String?
+  assignedStaff        String?              // Nhân viên giao hàng / kỹ thuật viên lắp đặt được phân công
   notes                String?
   items                OrderItem[]
   payments             PaymentTransaction[]
@@ -294,3 +297,16 @@ model ShippingOrder {
 
   @@map("shipping_orders")
 }
+
+model Banner {
+  id        String   @id @default(uuid())
+  title     String
+  imageUrl  String
+  linkUrl   String?
+  position  Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@map("banners")
+}
+

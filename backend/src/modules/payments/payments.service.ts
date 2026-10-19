@@ -103,6 +103,61 @@ export class PaymentsService {
     return { success: false, orderCode: order.orderCode, message: 'Thanh toán thất bại hoặc đã hủy' };
   }
 
+  async handleVnpayIpn(query: Record<string, any>) {
+    const result = this.vnpayService.verifyReturnUrl(query);
+    if (!result.isValidHash) {
+      return { RspCode: '97', Message: 'Checksum failed' };
+    }
+
+    const order = await this.prisma.order.findUnique({
+      where: { id: result.orderId },
+      include: { user: true, items: true },
+    });
+
+    if (!order) {
+      return { RspCode: '01', Message: 'Order not found' };
+    }
+
+    if (order.paymentStatus === PaymentStatus.SUCCESS) {
+      return { RspCode: '02', Message: 'Order already confirmed' };
+    }
+
+    if (result.isSuccess) {
+      await this.prisma.order.update({
+        where: { id: order.id },
+        data: {
+          paymentStatus: PaymentStatus.SUCCESS,
+          status: OrderStatus.CONFIRMED,
+        },
+      });
+
+      await this.prisma.paymentTransaction.create({
+        data: {
+          orderId: order.id,
+          provider: PaymentProvider.VNPAY,
+          transactionNo: result.transactionNo,
+          amount: result.amount,
+          status: PaymentStatus.SUCCESS,
+          responseCode: query['vnp_ResponseCode'],
+          payload: query,
+        },
+      });
+
+      if (order.user?.email) {
+        await this.mailService.sendOrderConfirmationEmail(order, order.user.email);
+      }
+
+      return { RspCode: '00', Message: 'Confirm Success' };
+    } else {
+      await this.prisma.order.update({
+        where: { id: order.id },
+        data: { paymentStatus: PaymentStatus.FAILED },
+      });
+
+      return { RspCode: '00', Message: 'Confirm Success' };
+    }
+  }
+
   async handleMomoIpn(body: any) {
     const isValid = this.momoService.verifyIpnSignature(body);
     if (!isValid) return { message: 'Invalid signature' };
