@@ -9,7 +9,7 @@ import DetailActions from './DetailActions';
 import Product360Viewer from '@/components/product-detail/Product360Viewer';
 import AccessoryBundleCard from '@/components/product-detail/AccessoryBundleCard';
 import ReviewsSection from '@/components/product-detail/ReviewsSection';
-import { ShieldCheck, Truck, RotateCcw, Zap } from 'lucide-react';
+import { ShieldCheck, Truck, RotateCcw, Zap, CheckCircle2, Box, FileText, PhoneCall } from 'lucide-react';
 
 const FALLBACK_DETAIL_DATA: Record<string, any> = {
   'may-giat-say-panasonic-inverter-10kg': {
@@ -27,7 +27,7 @@ const FALLBACK_DETAIL_DATA: Record<string, any> = {
       'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80',
     ],
-    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/watch?v=kYJvE6t2B5U',
     brand: { name: 'Panasonic', slug: 'panasonic' },
     category: { name: 'Điện Lạnh' },
     warrantyMonths: 24,
@@ -117,6 +117,11 @@ export default async function ProductDetailPage({ params }: { params: { slug: st
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
     : null;
 
+  const savingAmount =
+    product.originalPrice && product.originalPrice > product.price
+      ? product.originalPrice - product.price
+      : 0;
+
   return (
     <div className="container mx-auto px-4 py-8 space-y-12">
       {/* Breadcrumb */}
@@ -181,26 +186,51 @@ export default async function ProductDetailPage({ params }: { params: { slug: st
             <p className="text-xs text-gray-400 mt-1">Mã SKU: {product.sku}</p>
           </div>
 
-          {/* Pricing Box */}
-          <div className="p-4 bg-red-50/60 rounded-2xl border border-red-100 flex items-baseline gap-4">
+          {/* Pricing Box chuẩn Retail */}
+          <div className="p-4 bg-red-50/70 rounded-2xl border border-red-100 flex flex-wrap items-baseline gap-3">
             <span className="text-3xl font-extrabold text-red-600">
               {formatPrice(product.price)}
             </span>
             {product.originalPrice && (
-              <span className="text-base text-gray-400 line-through">
+              <span className="text-sm text-gray-400 line-through">
                 {formatPrice(product.originalPrice)}
               </span>
             )}
-            {discountPercent && (
-              <span className="text-xs font-bold text-red-700 bg-red-200/80 px-2 py-0.5 rounded">
-                Tiết kiệm {discountPercent}%
+            {savingAmount > 0 && (
+              <span className="text-xs font-bold text-red-700 bg-red-100 border border-red-200 px-2.5 py-0.5 rounded-md">
+                Tiết kiệm {formatPrice(savingAmount)} ({discountPercent}%)
               </span>
             )}
+          </div>
+
+          {/* Điểm nổi bật đáng tiền nhất (Key Highlights) */}
+          <div className="bg-slate-50 border border-slate-200/90 rounded-xl p-4 space-y-2.5">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              Đặc Điểm Nổi Bật Đáng Tiền Nhất
+            </h3>
+            <ul className="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
+              <li>Công nghệ tiết kiệm điện tối ưu, vận hành êm ái bền bỉ</li>
+              <li>Linh kiện và hoàn thiện chính hãng đạt chuẩn kiểm định an toàn quốc tế</li>
+              <li>Hỗ trợ kích hoạt bảo hành điện tử chính hãng theo số Serial/IMEI</li>
+              <li>Đầy đủ hóa đơn tài chính VAT điện tử hợp lệ cho cá nhân & doanh nghiệp</li>
+            </ul>
           </div>
 
           <p className="text-sm text-gray-600 leading-relaxed">
             {product.shortDescription || product.description}
           </p>
+
+          {/* Bộ sản phẩm tiêu chuẩn (Trong hộp gồm có) */}
+          <div className="bg-white border border-slate-200 rounded-xl p-3.5 space-y-2">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
+              <Box className="w-4 h-4 text-blue-600" />
+              Bộ sản phẩm tiêu chuẩn gồm:
+            </h4>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Thân máy nguyên niêm phong (seal), phụ kiện tiêu chuẩn đi kèm theo quy cách đóng gói nhà sản xuất, sách hướng dẫn sử dụng tiếng Việt và phiếu thông tin bảo hành điện tử.
+            </p>
+          </div>
 
           {/* Biến thể sản phẩm (Màu sắc, Dung tích, Công suất) */}
           {product.variants && product.variants.length > 0 && (

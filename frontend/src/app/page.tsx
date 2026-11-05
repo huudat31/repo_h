@@ -88,9 +88,6 @@ export default async function HomePage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-5">
           {/* Main Showcase (8/12 cols): Flagship iPhone 16 Pro Max */}
           <div className="lg:col-span-8 bg-slate-950 text-white rounded-2xl p-6 sm:p-8 md:p-10 relative overflow-hidden flex flex-col justify-between border border-slate-800 shadow-sm">
-            {/* Ambient Lighting */}
-            <div className="absolute top-0 right-1/4 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-
             {/* Grid 2 cột cân bằng: Trái là Content, Phải là Ảnh sản phẩm đầy đủ */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center relative z-10">
               {/* Left Column: Metadata & CTAs */}
@@ -110,7 +107,7 @@ export default async function HomePage() {
                 </div>
 
                 <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-md">
-                  Hiệu năng vượt trội từ tiến trình 3nm thế hệ mới, phím Điều khiển Camera chuyên nghiệp và khung vỏ Titan chuẩn hàng không vũ trụ siêu bền nhẹ.
+                  Trang bị chip Apple A18 Pro 3nm mạnh mẽ, phím Camera Control cảm ứng lực tiện lợi và khung viền Titan cấp 5 siêu nhẹ bền bỉ. Hàng chính hãng phân phối chính thức mã VN/A, bảo hành 12 tháng tại các trung tâm AASP toàn quốc.
                 </p>
 
                 <div className="pt-1">

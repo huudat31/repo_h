@@ -12,7 +12,10 @@
     "start:prod": "node dist/main",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:seed": "ts-node prisma/seed.ts"
+    "prisma:seed": "ts-node prisma/seed.ts",
+    "test": "jest --config jest.config.json --passWithNoTests",
+    "test:cov": "jest --config jest.config.json --coverage",
+    "test:watch": "jest --config jest.config.json --watch"
   },
   "dependencies": {
     "@elastic/elasticsearch": "^8.13.0",
@@ -39,12 +42,16 @@
   "devDependencies": {
     "@nestjs/cli": "^10.3.2",
     "@nestjs/schematics": "^10.1.1",
+    "@nestjs/testing": "^10.4.22",
     "@types/bcryptjs": "^2.4.6",
     "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.14",
     "@types/node": "^20.12.7",
     "@types/nodemailer": "^6.4.14",
     "@types/passport-jwt": "^4.0.1",
+    "jest": "^29.7.0",
     "prisma": "^5.12.1",
+    "ts-jest": "^29.4.15",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }

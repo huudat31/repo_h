@@ -18,7 +18,10 @@
     "db:migrate": "npm --prefix backend run prisma:migrate",
     "db:seed": "npm --prefix backend run prisma:seed",
     "docker:up": "docker compose up -d",
-    "docker:down": "docker compose down"
+    "docker:down": "docker compose down",
+    "test": "npm --prefix backend run test && npm --prefix frontend run test",
+    "test:backend": "npm --prefix backend run test",
+    "test:frontend": "npm --prefix frontend run test"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
