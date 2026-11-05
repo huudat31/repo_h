@@ -48,31 +48,31 @@ async function getCategories() {
 
 const CATEGORY_THUMBNAILS: Record<string, { image: string; tag: string }> = {
   'dien-thoai-tablet': {
-    image: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/ipad-pro-finish-unselect-gallery-1-202405?wid=800&hei=800&fmt=jpeg&qlt=90',
+    image: '/images/categories/dien-thoai.png',
     tag: 'iPhone, Galaxy, iPad',
   },
   'laptop-gaming': {
-    image: 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=800&q=80',
+    image: '/images/categories/laptop.jpg',
     tag: 'MacBook, ASUS ROG',
   },
   'dien-lanh': {
-    image: 'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=800&q=80',
+    image: '/images/categories/dien-lanh.jpg',
     tag: 'Điều hòa, Tủ lạnh',
   },
   'gia-dung': {
-    image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80',
+    image: '/images/categories/gia-dung.jpg',
     tag: 'Nồi chiên, Máy rửa bát',
   },
   'tivi-am-thanh': {
-    image: 'https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=800&q=80',
+    image: '/images/categories/tivi.jpg',
     tag: 'Sony OLED, Soundbar',
   },
   'smart-home': {
-    image: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=800&q=80',
+    image: '/images/categories/smart-home.jpg',
     tag: 'Robot hút bụi, Dyson',
   },
   'phu-kien': {
-    image: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MTJV3?wid=800&hei=800&fmt=jpeg&qlt=90',
+    image: '/images/categories/phu-kien.png',
     tag: 'AirPods, Chuột MX',
   },
 };
@@ -136,7 +136,7 @@ export default async function HomePage() {
               <div className="relative w-full h-36 sm:h-40 my-3 flex items-center justify-center p-2 group-hover:scale-105 transition-transform duration-300">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=800&q=80"
+                  src="/images/hero/asus-rog-g16.jpg"
                   alt="Laptop ASUS ROG Zephyrus G16 OLED"
                   loading="lazy"
                   className="w-full h-full object-contain rounded-xl drop-shadow-sm"
