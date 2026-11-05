@@ -21,14 +21,139 @@ export interface ProductItem {
   crossSells?: Array<{ id: string; name: string; slug: string; price: number; images: string[]; specs?: any }>;
 }
 
+export interface HeroSlide {
+  id: string;
+  badge: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  price: number;
+  originalPrice: number;
+  savingText: string;
+  highlightSpecs: string[];
+  productSlug: string;
+  primaryCtaText: string;
+  secondaryCtaText: string;
+  secondaryCtaLink: string;
+  image: string;
+  imageAlt: string;
+  themeGradient: string;
+  accentGlow: string;
+}
+
+export const HERO_SLIDES: HeroSlide[] = [
+  {
+    id: 'slide-iphone-16-pro-max',
+    badge: 'FLAGSHIP CHIẾN LƯỢC · CHÍNH HÃNG VN/A',
+    title: 'iPhone 16 Pro Max',
+    subtitle: 'Titan Tự Nhiên · Chip Apple A18 Pro 3nm',
+    description:
+      'Trang bị chip Apple A18 Pro 3nm cực mạnh, phím Camera Control cảm ứng lực và khung viền Titan cấp 5 siêu nhẹ bền bỉ. Màn hình Super Retina XDR 6.9 inch ProMotion 120Hz viền mỏng nhất lịch sử Apple.',
+    price: 34490000,
+    originalPrice: 36990000,
+    savingText: 'Tiết kiệm 2.500.000₫',
+    highlightSpecs: ['Chip A18 Pro 3nm', 'Màn 6.9" 120Hz', 'Camera 48MP Zoom 5x', 'Trả góp 0%'],
+    productSlug: 'iphone-16-pro-max-256gb-titan',
+    primaryCtaText: 'Mua Ngay Nhận Ưu Đãi',
+    secondaryCtaText: 'Hệ sinh thái Apple',
+    secondaryCtaLink: '/products?brandSlug=apple',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/e/e2/IPhone_16_Pro_Max_Desert_Titanium_Rear.png',
+    imageAlt: 'iPhone 16 Pro Max Titan Chính Hãng',
+    themeGradient: 'from-slate-950 via-slate-900 to-amber-950/40',
+    accentGlow: 'bg-amber-500/15',
+  },
+  {
+    id: 'slide-asus-rog-g16',
+    badge: 'QUÁI VẬT GAMING · OLED 2.5K 240Hz',
+    title: 'ASUS ROG Zephyrus G16',
+    subtitle: 'Intel Core Ultra 9 · RTX 4080 12GB GDDR6',
+    description:
+      'Khung nhôm CNC nguyên khối siêu mỏng nhẹ chỉ 1.49cm. Màn hình chuẩn màu đồ họa 100% DCI-P3 tần số quét 240Hz siêu tốc 0.2ms, tản nhiệt buồng hơi 3 quạt Arc Flow Gen 2 mát lạnh.',
+    price: 68990000,
+    originalPrice: 74990000,
+    savingText: 'Tiết kiệm 6.000.000₫',
+    highlightSpecs: ['Core Ultra 9 185H', 'RTX 4080 12GB', 'RAM 32GB LPDDR5X', 'SSD 2TB PCIe 4.0'],
+    productSlug: 'laptop-asus-rog-zephyrus-g16-oled-2026',
+    primaryCtaText: 'Khám Phá Cấu Hình',
+    secondaryCtaText: 'Dòng ROG Gaming',
+    secondaryCtaLink: '/products?brandSlug=asus-rog',
+    image: 'https://dlcdnwebimgs.asus.com/files/media/AE97C70A-B57E-40F8-9FBA-87CE7F99428F/v1/images/large/2x/display_laptop.png',
+    imageAlt: 'Laptop ASUS ROG Zephyrus G16 OLED',
+    themeGradient: 'from-slate-950 via-slate-900 to-blue-950/50',
+    accentGlow: 'bg-blue-600/20',
+  },
+  {
+    id: 'slide-samsung-s24-ultra',
+    badge: 'QUYỀN NĂNG ĐỘT PHÁ · GALAXY AI',
+    title: 'Samsung Galaxy S24 Ultra',
+    subtitle: 'Khung Viền Titan · Snapdragon 8 Gen 3 for Galaxy',
+    description:
+      'Quyền năng Galaxy AI dịch thuật trực tiếp cuộc gọi, khoanh tròn để tìm kiếm thông minh và camera 200MP bắt trọn màn đêm với zoom quang học 10x chuẩn điện ảnh.',
+    price: 26990000,
+    originalPrice: 33990000,
+    savingText: 'Tiết kiệm 7.000.000₫',
+    highlightSpecs: ['Galaxy AI tiếng Việt', 'Màn 6.8" 2600 nits', 'Bút S-Pen tích hợp', 'Pin 5000 mAh'],
+    productSlug: 'samsung-galaxy-s24-ultra-5g-256gb',
+    primaryCtaText: 'Mua Ngay Trợ Giá 7Tr',
+    secondaryCtaText: 'Hệ sinh thái Samsung',
+    secondaryCtaLink: '/products?brandSlug=samsung',
+    image: 'https://img.global.news.samsung.com/global/wp-content/uploads/2024/01/Galaxy-S24-Series_main1.jpg',
+    imageAlt: 'Samsung Galaxy S24 Ultra 5G Chính Hãng',
+    themeGradient: 'from-slate-950 via-slate-900 to-indigo-950/40',
+    accentGlow: 'bg-purple-600/15',
+  },
+];
+
 export const CURATED_CATEGORIES = [
-  { id: 'cat-1', name: 'Điện Thoại & Tablet', slug: 'dien-thoai-tablet', _count: { products: 4 } },
-  { id: 'cat-2', name: 'Laptop Gaming & Đồ Họa', slug: 'laptop-gaming', _count: { products: 2 } },
-  { id: 'cat-3', name: 'Điện Lạnh (Điều Hòa & Tủ Lạnh)', slug: 'dien-lanh', _count: { products: 5 } },
-  { id: 'cat-4', name: 'Gia Dụng Nhà Bếp', slug: 'gia-dung', _count: { products: 4 } },
-  { id: 'cat-5', name: 'Tivi & Âm Thanh Cao Cấp', slug: 'tivi-am-thanh', _count: { products: 3 } },
-  { id: 'cat-6', name: 'Nhà Thông Minh & Robot', slug: 'smart-home', _count: { products: 3 } },
-  { id: 'cat-7', name: 'Phụ Kiện Công Nghệ Chính Hãng', slug: 'phu-kien', _count: { products: 3 } },
+  {
+    id: 'cat-1',
+    name: 'Điện Thoại & Tablet',
+    slug: 'dien-thoai-tablet',
+    _count: { products: 4 },
+    subcategories: ['iPhone 16 Series', 'Samsung Galaxy S24', 'iPad Pro M4', 'Phụ kiện Apple chính hãng'],
+  },
+  {
+    id: 'cat-2',
+    name: 'Laptop Gaming & Đồ Họa',
+    slug: 'laptop-gaming',
+    _count: { products: 2 },
+    subcategories: ['ASUS ROG Zephyrus', 'MacBook Pro M3', 'Laptop Ultra AI', 'Balo & Chuột Gaming'],
+  },
+  {
+    id: 'cat-3',
+    name: 'Điện Lạnh (Điều Hòa & Tủ Lạnh)',
+    slug: 'dien-lanh',
+    _count: { products: 5 },
+    subcategories: ['Điều hòa Daikin Inverter', 'Tủ lạnh Panasonic Prime+', 'Máy giặt sấy 10.5kg', 'Tủ lạnh LG InstaView'],
+  },
+  {
+    id: 'cat-4',
+    name: 'Gia Dụng Nhà Bếp',
+    slug: 'gia-dung',
+    _count: { products: 4 },
+    subcategories: ['Nồi chiên Philips XXL', 'Máy rửa bát Bosch Series 6', 'Nồi cơm điện Cuckoo', 'Nồi chiên Sunhouse'],
+  },
+  {
+    id: 'cat-5',
+    name: 'Tivi & Âm Thanh Cao Cấp',
+    slug: 'tivi-am-thanh',
+    _count: { products: 3 },
+    subcategories: ['Smart Tivi Sony Bravia OLED', 'Samsung Neo QLED 75"', 'Loa Soundbar Sony 7.1.2', 'Tai nghe Sony WH-1000XM5'],
+  },
+  {
+    id: 'cat-6',
+    name: 'Nhà Thông Minh & Robot',
+    slug: 'smart-home',
+    _count: { products: 3 },
+    subcategories: ['Robot hút bụi Ecovacs T30', 'Máy lọc không khí Dyson HP07', 'Máy lọc Philips 4000i', 'Cảm biến nhà thông minh'],
+  },
+  {
+    id: 'cat-7',
+    name: 'Phụ Kiện Công Nghệ',
+    slug: 'phu-kien',
+    _count: { products: 3 },
+    subcategories: ['Apple AirPods Pro 2', 'Chuột Logitech MX Master 3S', 'Củ sạc nhanh GaN', 'Cáp sạc C to C bọc dù'],
+  },
 ];
 
 export const CURATED_PRODUCTS: ProductItem[] = [
@@ -40,8 +165,9 @@ export const CURATED_PRODUCTS: ProductItem[] = [
     price: 34490000,
     originalPrice: 36990000,
     images: [
-      'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?auto=format&fit=crop&w=800&q=80',
+      'https://upload.wikimedia.org/wikipedia/commons/e/e2/IPhone_16_Pro_Max_Desert_Titanium_Rear.png',
+      'https://www.apple.com/newsroom/images/2024/09/apple-debuts-iphone-16-pro-and-iphone-16-pro-max/article/Apple-iPhone-16-Pro-hero-240909_inline.jpg.large_2x.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/4/40/IPhone_16_Pro_Max_screen.png',
     ],
     category: { name: 'Điện Thoại & Tablet', slug: 'dien-thoai-tablet' },
     brand: { name: 'Apple', slug: 'apple' },
@@ -69,8 +195,8 @@ export const CURATED_PRODUCTS: ProductItem[] = [
       { name: 'Titan Đen (512GB)', sku: 'IPHONE-16PM-512-BLK', price: 40990000 },
     ],
     media360Urls: [
-      'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?auto=format&fit=crop&w=800&q=80',
+      'https://upload.wikimedia.org/wikipedia/commons/e/e2/IPhone_16_Pro_Max_Desert_Titanium_Rear.png',
+      'https://upload.wikimedia.org/wikipedia/commons/4/40/IPhone_16_Pro_Max_screen.png',
     ],
     videoUrl: 'https://www.youtube.com/watch?v=kYJvE6t2B5U',
     crossSells: [
@@ -92,8 +218,8 @@ export const CURATED_PRODUCTS: ProductItem[] = [
     price: 68990000,
     originalPrice: 74990000,
     images: [
-      'https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=800&q=80',
+      'https://dlcdnwebimgs.asus.com/files/media/AE97C70A-B57E-40F8-9FBA-87CE7F99428F/v1/images/large/2x/display_laptop.png',
+      'https://dlcdnwebimgs.asus.com/files/media/AE97C70A-B57E-40F8-9FBA-87CE7F99428F/v1/images/large/2x/software_laptop.png',
     ],
     category: { name: 'Laptop Gaming & Đồ Họa', slug: 'laptop-gaming' },
     brand: { name: 'ASUS ROG', slug: 'asus-rog' },
@@ -125,7 +251,7 @@ export const CURATED_PRODUCTS: ProductItem[] = [
     price: 26990000,
     originalPrice: 33990000,
     images: [
-      'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=800&q=80',
+      'https://img.global.news.samsung.com/global/wp-content/uploads/2024/01/Galaxy-S24-Series_main1.jpg',
     ],
     category: { name: 'Điện Thoại & Tablet', slug: 'dien-thoai-tablet' },
     brand: { name: 'Samsung', slug: 'samsung' },
@@ -266,7 +392,7 @@ export const CURATED_PRODUCTS: ProductItem[] = [
     images: [
       'https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?auto=format&fit=crop&w=800&q=80',
     ],
-    category: { name: 'Phụ Kiện Công Nghệ Chính Hãng', slug: 'phu-kien' },
+    category: { name: 'Phụ Kiện Công Nghệ', slug: 'phu-kien' },
     brand: { name: 'Apple', slug: 'apple' },
     avgRating: 4.9,
     reviewCount: 110,
@@ -288,7 +414,7 @@ export const CURATED_PRODUCTS: ProductItem[] = [
     images: [
       'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=800&q=80',
     ],
-    category: { name: 'Phụ Kiện Công Nghệ Chính Hãng', slug: 'phu-kien' },
+    category: { name: 'Phụ Kiện Công Nghệ', slug: 'phu-kien' },
     brand: { name: 'Logitech', slug: 'logitech' },
     avgRating: 4.9,
     reviewCount: 88,

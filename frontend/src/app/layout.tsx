@@ -3,6 +3,7 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ComparisonBar from '@/components/comparison/ComparisonBar';
+import FloatingSupportWidget from '@/components/FloatingSupportWidget';
 import { AuthProvider } from '@/lib/auth-context';
 
 export const metadata: Metadata = {
@@ -30,6 +31,7 @@ export default function RootLayout({
           <Navbar />
           <main className="flex-1">{children}</main>
           <ComparisonBar />
+          <FloatingSupportWidget />
           <Footer />
         </AuthProvider>
       </body>
