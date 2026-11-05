@@ -48,31 +48,31 @@ async function getCategories() {
 
 const CATEGORY_THUMBNAILS: Record<string, { image: string; tag: string }> = {
   'dien-thoai-tablet': {
-    image: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&q=80',
+    image: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/ipad-pro-finish-unselect-gallery-1-202405?wid=800&hei=800&fmt=jpeg&qlt=90',
     tag: 'iPhone, Galaxy, iPad',
   },
   'laptop-gaming': {
-    image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&q=80',
+    image: 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=800&q=80',
     tag: 'MacBook, ASUS ROG',
   },
   'dien-lanh': {
-    image: 'https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=400&q=80',
+    image: 'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=800&q=80',
     tag: 'Điều hòa, Tủ lạnh',
   },
   'gia-dung': {
-    image: 'https://images.unsplash.com/photo-1585515320310-259814833e62?auto=format&fit=crop&w=400&q=80',
+    image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80',
     tag: 'Nồi chiên, Máy rửa bát',
   },
   'tivi-am-thanh': {
-    image: 'https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=400&q=80',
+    image: 'https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=800&q=80',
     tag: 'Sony OLED, Soundbar',
   },
   'smart-home': {
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&q=80',
+    image: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=800&q=80',
     tag: 'Robot hút bụi, Dyson',
   },
   'phu-kien': {
-    image: 'https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=400&q=80',
+    image: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MTJV3?wid=800&hei=800&fmt=jpeg&qlt=90',
     tag: 'AirPods, Chuột MX',
   },
 };
@@ -136,10 +136,10 @@ export default async function HomePage() {
               <div className="relative w-full h-36 sm:h-40 my-3 flex items-center justify-center p-2 group-hover:scale-105 transition-transform duration-300">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="https://dlcdnwebimgs.asus.com/files/media/AE97C70A-B57E-40F8-9FBA-87CE7F99428F/v1/images/large/2x/display_laptop.png"
+                  src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=800&q=80"
                   alt="Laptop ASUS ROG Zephyrus G16 OLED"
                   loading="lazy"
-                  className="w-full h-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.1)]"
+                  className="w-full h-full object-contain rounded-xl drop-shadow-sm"
                 />
               </div>
 

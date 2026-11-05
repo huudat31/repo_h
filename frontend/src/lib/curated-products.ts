@@ -57,7 +57,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     primaryCtaText: 'Mua Ngay Nhận Ưu Đãi',
     secondaryCtaText: 'Hệ sinh thái Apple',
     secondaryCtaLink: '/products?brandSlug=apple',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/e/e2/IPhone_16_Pro_Max_Desert_Titanium_Rear.png',
+    image: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-16-pro-finish-select-202409-6-9inch-deserttitanium?wid=1000&hei=1000&fmt=jpeg&qlt=90',
     imageAlt: 'iPhone 16 Pro Max Titan Chính Hãng',
     themeGradient: 'from-slate-50 via-white to-amber-50/30',
     accentGlow: 'bg-amber-100/40',
@@ -77,7 +77,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     primaryCtaText: 'Khám Phá Cấu Hình',
     secondaryCtaText: 'Dòng ROG Gaming',
     secondaryCtaLink: '/products?brandSlug=asus-rog',
-    image: 'https://dlcdnwebimgs.asus.com/files/media/AE97C70A-B57E-40F8-9FBA-87CE7F99428F/v1/images/large/2x/display_laptop.png',
+    image: 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=1000&q=80',
     imageAlt: 'Laptop ASUS ROG Zephyrus G16 OLED',
     themeGradient: 'from-slate-50 via-white to-blue-50/30',
     accentGlow: 'bg-blue-100/40',
@@ -97,7 +97,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     primaryCtaText: 'Mua Ngay Trợ Giá 7Tr',
     secondaryCtaText: 'Hệ sinh thái Samsung',
     secondaryCtaLink: '/products?brandSlug=samsung',
-    image: 'https://img.global.news.samsung.com/global/wp-content/uploads/2024/01/Galaxy-S24-Series_main1.jpg',
+    image: 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=1000&q=80',
     imageAlt: 'Samsung Galaxy S24 Ultra 5G Chính Hãng',
     themeGradient: 'from-slate-50 via-white to-indigo-50/30',
     accentGlow: 'bg-indigo-100/40',
@@ -166,9 +166,9 @@ export const CURATED_PRODUCTS: ProductItem[] = [
     price: 34490000,
     originalPrice: 36990000,
     images: [
-      'https://upload.wikimedia.org/wikipedia/commons/e/e2/IPhone_16_Pro_Max_Desert_Titanium_Rear.png',
+      'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-16-pro-finish-select-202409-6-9inch-deserttitanium?wid=1000&hei=1000&fmt=jpeg&qlt=90',
       'https://www.apple.com/newsroom/images/2024/09/apple-debuts-iphone-16-pro-and-iphone-16-pro-max/article/Apple-iPhone-16-Pro-finish-lineup-240909_big.jpg.large_2x.jpg',
-      'https://upload.wikimedia.org/wikipedia/commons/4/40/IPhone_16_Pro_Max_screen.png',
+      'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-16-pro-finish-select-202409-6-9inch-naturaltitanium?wid=1000&hei=1000&fmt=jpeg&qlt=90',
     ],
     category: { name: 'Điện Thoại & Tablet', slug: 'dien-thoai-tablet' },
     brand: { name: 'Apple', slug: 'apple' },
@@ -192,7 +192,7 @@ export const CURATED_PRODUCTS: ProductItem[] = [
     price: 26990000,
     originalPrice: 33990000,
     images: [
-      'https://img.global.news.samsung.com/global/wp-content/uploads/2024/01/Galaxy-S24-Series_main1.jpg',
+      'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=1000&q=80',
     ],
     category: { name: 'Điện Thoại & Tablet', slug: 'dien-thoai-tablet' },
     brand: { name: 'Samsung', slug: 'samsung' },
@@ -239,7 +239,7 @@ export const CURATED_PRODUCTS: ProductItem[] = [
     price: 39990000,
     originalPrice: 43990000,
     images: [
-      'https://img.global.news.samsung.com/global/wp-content/uploads/2024/01/Galaxy-S24-Series_main1.jpg',
+      'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=1000&q=80',
     ],
     category: { name: 'Điện Thoại & Tablet', slug: 'dien-thoai-tablet' },
     brand: { name: 'Samsung', slug: 'samsung' },
@@ -333,7 +333,7 @@ export const CURATED_PRODUCTS: ProductItem[] = [
     price: 68990000,
     originalPrice: 74990000,
     images: [
-      'https://dlcdnwebimgs.asus.com/files/media/AE97C70A-B57E-40F8-9FBA-87CE7F99428F/v1/images/large/2x/display_laptop.png',
+      'https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=1000&q=80',
       'https://dlcdnwebimgs.asus.com/files/media/AE97C70A-B57E-40F8-9FBA-87CE7F99428F/v1/images/large/2x/software_laptop.png',
     ],
     category: { name: 'Laptop Gaming & Đồ Họa', slug: 'laptop-gaming' },
@@ -427,7 +427,7 @@ export const CURATED_PRODUCTS: ProductItem[] = [
     price: 28990000,
     originalPrice: 31990000,
     images: [
-      'https://dlcdnwebimgs.asus.com/files/media/AE97C70A-B57E-40F8-9FBA-87CE7F99428F/v1/images/large/2x/display_laptop.png',
+      'https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=1000&q=80',
     ],
     category: { name: 'Laptop Gaming & Đồ Họa', slug: 'laptop-gaming' },
     brand: { name: 'ASUS', slug: 'asus' },
@@ -631,7 +631,7 @@ export const CURATED_PRODUCTS: ProductItem[] = [
     price: 4290000,
     originalPrice: 5690000,
     images: [
-      'https://images.unsplash.com/photo-1585515320310-259814833e62?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80',
     ],
     category: { name: 'Gia Dụng Nhà Bếp', slug: 'gia-dung' },
     brand: { name: 'Philips', slug: 'philips' },
@@ -697,7 +697,7 @@ export const CURATED_PRODUCTS: ProductItem[] = [
     price: 1990000,
     originalPrice: 2890000,
     images: [
-      'https://images.unsplash.com/photo-1585515320310-259814833e62?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80',
     ],
     category: { name: 'Gia Dụng Nhà Bếp', slug: 'gia-dung' },
     brand: { name: 'Sunhouse', slug: 'sunhouse' },
@@ -741,7 +741,7 @@ export const CURATED_PRODUCTS: ProductItem[] = [
     price: 10990000,
     originalPrice: 12900000,
     images: [
-      'https://images.unsplash.com/photo-1585515320310-259814833e62?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80',
     ],
     category: { name: 'Gia Dụng Nhà Bếp', slug: 'gia-dung' },
     brand: { name: 'Hurom', slug: 'hurom' },
@@ -899,7 +899,7 @@ export const CURATED_PRODUCTS: ProductItem[] = [
     price: 16990000,
     originalPrice: 21990000,
     images: [
-      'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=800&q=80',
     ],
     category: { name: 'Nhà Thông Minh & Robot', slug: 'smart-home' },
     brand: { name: 'Ecovacs', slug: 'ecovacs' },
@@ -921,7 +921,7 @@ export const CURATED_PRODUCTS: ProductItem[] = [
     price: 18990000,
     originalPrice: 24990000,
     images: [
-      'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=800&q=80',
     ],
     category: { name: 'Nhà Thông Minh & Robot', slug: 'smart-home' },
     brand: { name: 'Dreame', slug: 'dreame' },
@@ -965,7 +965,7 @@ export const CURATED_PRODUCTS: ProductItem[] = [
     price: 13990000,
     originalPrice: 16990000,
     images: [
-      'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=800&q=80',
     ],
     category: { name: 'Nhà Thông Minh & Robot', slug: 'smart-home' },
     brand: { name: 'Philips', slug: 'philips' },
@@ -1010,7 +1010,7 @@ export const CURATED_PRODUCTS: ProductItem[] = [
     price: 5490000,
     originalPrice: 6190000,
     images: [
-      'https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?auto=format&fit=crop&w=800&q=80',
+      'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MTJV3?wid=1000&hei=1000&fmt=jpeg&qlt=90?auto=format&fit=crop&w=800&q=80',
     ],
     category: { name: 'Phụ Kiện Công Nghệ', slug: 'phu-kien' },
     brand: { name: 'Apple', slug: 'apple' },
@@ -1076,7 +1076,7 @@ export const CURATED_PRODUCTS: ProductItem[] = [
     price: 1490000,
     originalPrice: 1890000,
     images: [
-      'https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?auto=format&fit=crop&w=800&q=80',
+      'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MTJV3?wid=1000&hei=1000&fmt=jpeg&qlt=90?auto=format&fit=crop&w=800&q=80',
     ],
     category: { name: 'Phụ Kiện Công Nghệ', slug: 'phu-kien' },
     brand: { name: 'Anker', slug: 'anker' },
@@ -1098,7 +1098,7 @@ export const CURATED_PRODUCTS: ProductItem[] = [
     price: 1290000,
     originalPrice: 1590000,
     images: [
-      'https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?auto=format&fit=crop&w=800&q=80',
+      'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MTJV3?wid=1000&hei=1000&fmt=jpeg&qlt=90?auto=format&fit=crop&w=800&q=80',
     ],
     category: { name: 'Phụ Kiện Công Nghệ', slug: 'phu-kien' },
     brand: { name: 'Anker', slug: 'anker' },
