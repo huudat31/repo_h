@@ -23,7 +23,7 @@ import { formatPrice } from '@/lib/formatters';
 
 async function getProducts(): Promise<ProductItem[]> {
   try {
-    const res = await fetchApi<{ data: any[] }>('/products?limit=24');
+    const res = await fetchApi<{ data: any[] }>('/products?limit=50');
     if (res && res.data && res.data.length > 0) {
       return res.data;
     }
@@ -55,7 +55,7 @@ const CATEGORY_THUMBNAILS: Record<string, { image: string; tag: string }> = {
     tag: 'MacBook, ASUS ROG',
   },
   'dien-lanh': {
-    image: 'https://images.unsplash.com/photo-1614633833026-06203530c33a?auto=format&fit=crop&w=400&q=80',
+    image: 'https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=400&q=80',
     tag: 'Điều hòa, Tủ lạnh',
   },
   'gia-dung': {
