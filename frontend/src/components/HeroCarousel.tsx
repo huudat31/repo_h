@@ -117,14 +117,14 @@ export default function HeroCarousel() {
         </div>
 
         {/* Right Column (5 cols): Large Isolated Product Showcase */}
-        <div className="md:col-span-5 flex items-center justify-center p-2 relative">
-          <div className="relative w-full max-w-[320px] sm:max-w-[380px] aspect-[4/5] flex items-center justify-center">
+        <div className="md:col-span-5 flex items-center justify-center p-2 sm:p-4 relative h-full">
+          <div className="relative w-full max-w-[420px] sm:max-w-[480px] h-[340px] sm:h-[420px] md:h-[450px] flex items-center justify-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               key={currentSlide.id}
               src={currentSlide.image}
               alt={currentSlide.imageAlt}
-              className="w-full h-full object-contain object-center drop-shadow-[0_15px_25px_rgba(0,0,0,0.12)] hover:scale-105 transition-transform duration-500 animate-in fade-in zoom-in-95 duration-500"
+              className="w-full h-full object-contain object-center drop-shadow-[0_20px_35px_rgba(0,0,0,0.12)] hover:scale-105 transition-transform duration-500 animate-in fade-in zoom-in-95 duration-500 select-none pointer-events-none"
             />
           </div>
         </div>

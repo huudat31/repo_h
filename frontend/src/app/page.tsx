@@ -136,10 +136,10 @@ export default async function HomePage() {
               <div className="relative w-full h-36 sm:h-40 my-3 flex items-center justify-center p-2 group-hover:scale-105 transition-transform duration-300">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/hero/asus-rog-g16.jpg"
+                  src="/images/hero/asus-rog-g16.png"
                   alt="Laptop ASUS ROG Zephyrus G16 OLED"
                   loading="lazy"
-                  className="w-full h-full object-contain rounded-xl drop-shadow-sm"
+                  className="w-full h-full object-contain drop-shadow-sm"
                 />
               </div>
 
