@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ShoppingCart, Scale, Star, Check, ShieldCheck, Zap } from 'lucide-react';
+import { ShoppingCart, Scale, Star, Check } from 'lucide-react';
 import { formatPrice } from '@/lib/formatters';
 import { addToCart } from '@/lib/cart-store';
 import { addToCompare, removeFromCompare, getCompareList } from '@/lib/compare-store';
@@ -119,25 +119,25 @@ export default function ProductCard({ product, featuredBadge }: ProductCardProps
   const displayedBadges = badges.slice(0, 2);
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200/80 hover:border-blue-400 hover:shadow-[0_10px_25px_-5px_rgba(37,99,235,0.1),0_8px_10px_-6px_rgba(0,0,0,0.04)] transition-all duration-300 flex flex-col group relative overflow-hidden hover:-translate-y-1">
+    <div className="bg-white rounded-2xl border border-[#E5E7EB] hover:border-[#2563EB] hover:shadow-md transition-all duration-300 flex flex-col group relative overflow-hidden">
       {/* Top Banner & Quick Badges */}
       <div className="absolute top-2.5 left-2.5 right-2.5 z-10 flex items-center justify-between pointer-events-none">
         <div className="flex flex-col gap-1 items-start">
           {discountPercent && discountPercent > 0 ? (
-            <span className="bg-gradient-to-r from-red-600 to-rose-600 text-white text-[11px] font-black px-2 py-0.5 rounded-md shadow-sm tracking-tight">
+            <span className="bg-[#EF4444] text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-2xs">
               Giảm {discountPercent}%
             </span>
           ) : featuredBadge ? (
-            <span className="bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-md shadow-sm">
+            <span className="bg-[#2563EB] text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-2xs">
               {featuredBadge}
             </span>
           ) : (
-            <span className="bg-emerald-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded shadow-sm">
+            <span className="bg-[#16A34A] text-white text-[10px] font-bold px-1.5 py-0.5 rounded shadow-2xs">
               Chính hãng
             </span>
           )}
 
-          <span className="bg-amber-50 text-amber-800 border border-amber-200/80 text-[10px] font-bold px-1.5 py-0.2 rounded">
+          <span className="bg-[#F5F7FA] text-[#4B5563] border border-[#E5E7EB] text-[10px] font-medium px-1.5 py-0.2 rounded">
             Trả góp 0%
           </span>
         </div>
@@ -146,14 +146,14 @@ export default function ProductCard({ product, featuredBadge }: ProductCardProps
         <button
           onClick={handleToggleCompare}
           title={isComparing ? 'Đã thêm vào so sánh' : 'So sánh thông số'}
-          className={`pointer-events-auto p-1.5 rounded-lg text-xs font-medium flex items-center gap-1 transition shadow-sm border ${
+          className={`pointer-events-auto p-1.5 rounded-lg text-xs font-medium flex items-center gap-1 transition border ${
             isComparing
-              ? 'bg-blue-600 border-blue-600 text-white'
-              : 'bg-white/90 backdrop-blur border-slate-200 text-slate-500 hover:text-blue-600 hover:border-blue-300 hover:bg-white'
+              ? 'bg-[#2563EB] border-[#2563EB] text-white'
+              : 'bg-white/95 border-[#E5E7EB] text-[#6B7280] hover:text-[#2563EB] hover:border-[#2563EB]'
           }`}
         >
           <Scale className="w-3.5 h-3.5" />
-          <span className="text-[10px] font-semibold hidden sm:inline">
+          <span className="text-[10px] font-medium hidden sm:inline">
             {isComparing ? 'Đã chọn' : 'So sánh'}
           </span>
         </button>
@@ -162,7 +162,7 @@ export default function ProductCard({ product, featuredBadge }: ProductCardProps
       {/* Product Image Stage (Aspect 1:1 Canvas Studio) */}
       <Link
         href={`/products/${product.slug}`}
-        className="relative block aspect-square bg-slate-50/50 p-6 overflow-hidden flex items-center justify-center border-b border-slate-100 group-hover:bg-blue-50/20 transition-colors"
+        className="relative block aspect-square bg-[#F8FAFC] p-6 overflow-hidden flex items-center justify-center border-b border-[#F3F4F6] group-hover:bg-blue-50/20 transition-colors"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -170,7 +170,7 @@ export default function ProductCard({ product, featuredBadge }: ProductCardProps
           alt={product.name}
           loading="lazy"
           onError={() => setImgSrc(FALLBACK_IMAGE)}
-          className="w-full h-full object-contain object-center group-hover:scale-108 transition-transform duration-300 drop-shadow-sm"
+          className="w-full h-full object-contain object-center group-hover:scale-108 transition-transform duration-300 drop-shadow-2xs"
         />
       </Link>
 
@@ -179,23 +179,23 @@ export default function ProductCard({ product, featuredBadge }: ProductCardProps
         <div>
           {/* Brand & Category & Rating */}
           <div className="flex items-center justify-between gap-1 mb-1.5">
-            <div className="flex items-center gap-1.5 text-[11px] font-bold text-slate-400">
+            <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#9CA3AF]">
               {product.brand && (
-                <span className="text-blue-600 tracking-wider uppercase text-[10px]">
+                <span className="text-[#2563EB] tracking-wider uppercase text-[10px]">
                   {product.brand.name}
                 </span>
               )}
               {product.brand && product.category && <span>·</span>}
               {product.category && (
-                <span className="truncate max-w-[110px] font-medium text-slate-500 text-[10px]">
+                <span className="truncate max-w-[110px] font-medium text-[#6B7280] text-[10px]">
                   {product.category.name}
                 </span>
               )}
             </div>
 
             {/* Rating Stars */}
-            <div className="flex items-center gap-0.5 text-[11px] text-amber-500 font-bold shrink-0">
-              <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+            <div className="flex items-center gap-0.5 text-[11px] text-[#F59E0B] font-bold shrink-0">
+              <Star className="w-3 h-3 fill-[#F59E0B] text-[#F59E0B]" />
               <span>{product.avgRating ? product.avgRating.toFixed(1) : '4.9'}</span>
             </div>
           </div>
@@ -203,7 +203,7 @@ export default function ProductCard({ product, featuredBadge }: ProductCardProps
           {/* Product Name */}
           <Link
             href={`/products/${product.slug}`}
-            className="font-bold text-slate-900 group-hover:text-blue-600 line-clamp-2 text-xs sm:text-sm leading-snug mb-2 transition-colors min-h-[2.5rem]"
+            className="font-bold text-[#111827] group-hover:text-[#2563EB] line-clamp-2 text-xs sm:text-sm leading-snug mb-2 transition-colors min-h-[2.5rem]"
           >
             {product.name}
           </Link>
@@ -214,7 +214,7 @@ export default function ProductCard({ product, featuredBadge }: ProductCardProps
               {displayedBadges.map((badge, idx) => (
                 <span
                   key={idx}
-                  className="bg-slate-100/90 border border-slate-200/60 text-slate-700 text-[10px] font-medium px-2 py-0.5 rounded-md"
+                  className="bg-[#F5F7FA] border border-[#E5E7EB] text-[#4B5563] text-[10px] font-medium px-2 py-0.5 rounded"
                 >
                   {badge}
                 </span>
@@ -224,10 +224,10 @@ export default function ProductCard({ product, featuredBadge }: ProductCardProps
         </div>
 
         {/* Pricing Box & CTA */}
-        <div className="mt-2 pt-3 border-t border-slate-100 flex items-end justify-between gap-2">
+        <div className="mt-2 pt-3 border-t border-[#F3F4F6] flex items-end justify-between gap-2">
           <div>
             {/* Giá bán nổi bật */}
-            <div className="text-base sm:text-lg font-black text-red-600 leading-tight">
+            <div className="text-base sm:text-lg font-black text-[#EF4444] leading-tight">
               {formatPrice(product.price)}
             </div>
 
@@ -235,17 +235,17 @@ export default function ProductCard({ product, featuredBadge }: ProductCardProps
             <div className="flex items-center gap-1.5 mt-0.5">
               {product.originalPrice && product.originalPrice > product.price ? (
                 <>
-                  <span className="text-[11px] text-slate-400 line-through">
+                  <span className="text-[11px] text-[#9CA3AF] line-through font-medium">
                     {formatPrice(product.originalPrice)}
                   </span>
                   {savingAmount > 0 && (
-                    <span className="text-[10px] font-bold text-emerald-600 hidden sm:inline">
+                    <span className="text-[10px] font-bold text-[#16A34A] hidden sm:inline">
                       -{formatPrice(savingAmount)}
                     </span>
                   )}
                 </>
               ) : (
-                <span className="text-[10px] font-medium text-slate-500">Miễn phí giao hàng</span>
+                <span className="text-[10px] font-medium text-[#6B7280]">Giao nhanh 2H</span>
               )}
             </div>
           </div>
@@ -254,10 +254,10 @@ export default function ProductCard({ product, featuredBadge }: ProductCardProps
           <button
             onClick={handleQuickAdd}
             title="Thêm vào giỏ hàng"
-            className={`p-2.5 rounded-xl transition-all duration-200 shadow-sm shrink-0 flex items-center justify-center ${
+            className={`p-2.5 rounded-xl transition-all duration-200 shrink-0 flex items-center justify-center ${
               addedNotice
-                ? 'bg-emerald-600 text-white scale-105'
-                : 'bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white border border-blue-200/60'
+                ? 'bg-[#16A34A] text-white scale-105'
+                : 'bg-[#F5F7FA] text-[#111827] hover:bg-[#2563EB] hover:text-white border border-[#E5E7EB] hover:border-[#2563EB]'
             }`}
           >
             {addedNotice ? (

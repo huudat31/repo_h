@@ -59,8 +59,8 @@ export const HERO_SLIDES: HeroSlide[] = [
     secondaryCtaLink: '/products?brandSlug=apple',
     image: 'https://upload.wikimedia.org/wikipedia/commons/e/e2/IPhone_16_Pro_Max_Desert_Titanium_Rear.png',
     imageAlt: 'iPhone 16 Pro Max Titan Chính Hãng',
-    themeGradient: 'from-slate-950 via-slate-900 to-amber-950/40',
-    accentGlow: 'bg-amber-500/15',
+    themeGradient: 'from-slate-50 via-white to-amber-50/30',
+    accentGlow: 'bg-amber-100/40',
   },
   {
     id: 'slide-asus-rog-g16',
@@ -79,8 +79,8 @@ export const HERO_SLIDES: HeroSlide[] = [
     secondaryCtaLink: '/products?brandSlug=asus-rog',
     image: 'https://dlcdnwebimgs.asus.com/files/media/AE97C70A-B57E-40F8-9FBA-87CE7F99428F/v1/images/large/2x/display_laptop.png',
     imageAlt: 'Laptop ASUS ROG Zephyrus G16 OLED',
-    themeGradient: 'from-slate-950 via-slate-900 to-blue-950/50',
-    accentGlow: 'bg-blue-600/20',
+    themeGradient: 'from-slate-50 via-white to-blue-50/30',
+    accentGlow: 'bg-blue-100/40',
   },
   {
     id: 'slide-samsung-s24-ultra',
@@ -99,8 +99,8 @@ export const HERO_SLIDES: HeroSlide[] = [
     secondaryCtaLink: '/products?brandSlug=samsung',
     image: 'https://img.global.news.samsung.com/global/wp-content/uploads/2024/01/Galaxy-S24-Series_main1.jpg',
     imageAlt: 'Samsung Galaxy S24 Ultra 5G Chính Hãng',
-    themeGradient: 'from-slate-950 via-slate-900 to-indigo-950/40',
-    accentGlow: 'bg-purple-600/15',
+    themeGradient: 'from-slate-50 via-white to-indigo-50/30',
+    accentGlow: 'bg-indigo-100/40',
   },
 ];
 

@@ -17,29 +17,28 @@ import {
   Menu,
   X,
   ShieldAlert,
-  Flame,
   PhoneCall,
-  Sparkles,
-  ArrowRight,
   Smartphone,
   Laptop,
   Tv,
   Refrigerator,
   Zap,
+  Sparkles,
+  ArrowRight,
+  Tag,
 } from 'lucide-react';
 import { getCart } from '@/lib/cart-store';
 import { getCompareList } from '@/lib/compare-store';
 import { useAuth } from '@/lib/auth-context';
-import { CURATED_CATEGORIES } from '@/lib/curated-products';
 
-const QUICK_CATEGORIES = [
-  { name: 'Điện Thoại', slug: 'dien-thoai-tablet' },
-  { name: 'Laptop Gaming', slug: 'laptop-gaming' },
-  { name: 'Điện Lạnh Inverter', slug: 'dien-lanh' },
-  { name: 'Gia Dụng Bếp', slug: 'gia-dung' },
-  { name: 'Tivi & Loa', slug: 'tivi-am-thanh' },
-  { name: 'Nhà Thông Minh', slug: 'smart-home' },
-  { name: 'Phụ Kiện', slug: 'phu-kien' },
+const NAV_LINKS = [
+  { name: 'Trang chủ', href: '/' },
+  { name: 'Điện thoại', href: '/products?categoryId=dien-thoai-tablet' },
+  { name: 'Laptop', href: '/products?categoryId=laptop-gaming' },
+  { name: 'Điện lạnh', href: '/products?categoryId=dien-lanh' },
+  { name: 'Gia dụng', href: '/products?categoryId=gia-dung' },
+  { name: 'Tivi & Loa', href: '/products?categoryId=tivi-am-thanh' },
+  { name: 'Phụ kiện', href: '/products?categoryId=phu-kien' },
 ];
 
 export default function Navbar() {
@@ -97,48 +96,56 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.05)]">
-      {/* 1. TOP UTILITY BAR (Tăng độ tương phản chữ, sắc nét dễ đọc) */}
-      <div className="bg-slate-950 text-slate-200 text-xs font-medium hidden md:block border-b border-slate-800">
+    <header className="sticky top-0 z-50 bg-white border-b border-[#E5E7EB]">
+      {/* ============================================================== */}
+      {/* A. TOP INFORMATION BAR (Compact, Clean & Light #F9FAFB) */}
+      {/* ============================================================== */}
+      <div className="bg-[#F9FAFB] border-b border-[#E5E7EB] text-[11px] font-medium text-[#4B5563] hidden md:block">
         <div className="container mx-auto px-4 h-8 flex items-center justify-between">
-          {/* Left: Hotline & Showroom */}
-          <div className="flex items-center gap-4 text-slate-300">
+          {/* Left: Support & Guarantees */}
+          <div className="flex items-center gap-4 text-[#4B5563]">
             <span className="flex items-center gap-1.5">
-              <PhoneCall className="w-3.5 h-3.5 text-red-400" />
-              Tổng đài tư vấn: <strong className="text-white font-bold tracking-wide">1800 6868</strong> (Miễn phí 8:00 - 21:30)
+              <PhoneCall className="w-3.5 h-3.5 text-[#2563EB]" />
+              Tổng đài tư vấn: <strong className="text-[#111827] font-bold">1800 6868</strong> (Miễn phí 8:00 - 21:30)
             </span>
-            <span className="text-slate-700">|</span>
-            <span className="text-emerald-400 font-semibold flex items-center gap-1">
-              <ShieldCheck className="w-3.5 h-3.5" /> 100% Chính Hãng VN/A & Xuất Hóa Đơn VAT
+            <span className="text-[#D1D5DB]">|</span>
+            <span className="flex items-center gap-1.5 text-[#16A34A] font-semibold">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#16A34A]" />
+              100% Chính Hãng VN/A & Xuất Hóa Đơn VAT
+            </span>
+            <span className="text-[#D1D5DB]">|</span>
+            <span className="flex items-center gap-1.5 text-[#4B5563]">
+              <Truck className="w-3.5 h-3.5 text-[#2563EB]" />
+              Giao hàng nhanh toàn quốc
             </span>
           </div>
 
-          {/* Right: Quick Services */}
-          <div className="flex items-center gap-5 text-slate-200 font-medium">
+          {/* Right: Quick Utilities */}
+          <div className="flex items-center gap-5 font-medium text-[#4B5563]">
             <Link
               href="/tra-cuu-bao-hanh"
-              className="flex items-center gap-1.5 hover:text-white transition"
+              className="flex items-center gap-1.5 hover:text-[#2563EB] transition-colors"
             >
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+              <ShieldCheck className="w-3.5 h-3.5 text-[#16A34A]" />
               <span>Tra cứu bảo hành</span>
             </Link>
 
             <Link
               href="/tra-cuu-don-hang"
-              className="flex items-center gap-1.5 hover:text-white transition"
+              className="flex items-center gap-1.5 hover:text-[#2563EB] transition-colors"
             >
-              <Truck className="w-3.5 h-3.5 text-blue-400" />
+              <Truck className="w-3.5 h-3.5 text-[#2563EB]" />
               <span>Tra cứu đơn hàng</span>
             </Link>
 
             <Link
               href="/compare"
-              className="flex items-center gap-1.5 hover:text-white transition"
+              className="flex items-center gap-1.5 hover:text-[#2563EB] transition-colors"
             >
-              <Scale className="w-3.5 h-3.5 text-amber-400" />
+              <Scale className="w-3.5 h-3.5 text-[#F59E0B]" />
               <span>So sánh máy</span>
               {compareCount > 0 && (
-                <span className="bg-blue-600 text-white text-[10px] font-black px-1.5 py-0.2 rounded-full">
+                <span className="bg-[#2563EB] text-white text-[10px] font-bold px-1.5 py-0.2 rounded-full">
                   {compareCount}
                 </span>
               )}
@@ -147,7 +154,7 @@ export default function Navbar() {
             {user?.role === 'ADMIN' && (
               <Link
                 href="/portal"
-                className="flex items-center gap-1 bg-gradient-to-r from-purple-700 to-indigo-700 hover:opacity-90 text-white text-[10px] font-bold px-2 py-0.5 rounded transition shadow-sm"
+                className="flex items-center gap-1 bg-[#111827] hover:bg-[#1F2937] text-white text-[10px] font-bold px-2 py-0.5 rounded transition"
               >
                 <span>Cổng Quản Trị</span>
               </Link>
@@ -156,52 +163,54 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* 2. MAIN NAVIGATION BAR (Logo, Search, Cart & Unified Account Button) */}
+      {/* ============================================================== */}
+      {/* B. MAIN HEADER (Logo, Large Search Bar, Action Buttons) */}
+      {/* ============================================================== */}
       <div className="container mx-auto px-4 h-16 flex items-center justify-between gap-4 md:gap-8">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-1.5 shrink-0 group">
           <div className="flex items-baseline">
-            <span className="font-black text-2xl tracking-tight text-slate-950 group-hover:text-blue-600 transition">
+            <span className="font-extrabold text-2xl tracking-tight text-[#111827] group-hover:text-[#2563EB] transition-colors">
               TechStore
             </span>
-            <span className="ml-1.5 text-[10px] font-black uppercase tracking-wider bg-red-600 text-white px-1.5 py-0.5 rounded shadow-sm">
+            <span className="ml-1.5 text-[10px] font-bold uppercase tracking-wider bg-[#2563EB] text-white px-1.5 py-0.5 rounded">
               VN
             </span>
           </div>
         </Link>
 
-        {/* Search Bar - Center Modern Retail Search */}
-        <form onSubmit={handleSearch} className="flex-1 max-w-xl relative hidden md:block">
+        {/* Center Large Search Bar */}
+        <form onSubmit={handleSearch} className="flex-1 max-w-2xl relative hidden md:block">
           <div className="relative flex items-center">
             <input
               type="text"
-              placeholder="Tìm kiếm iPhone 16 Pro Max, RTX 4080, Tủ lạnh Inverter..."
+              placeholder="Tìm kiếm iPhone 16 Pro Max, Laptop Gaming, Tủ lạnh Inverter, Robot hút bụi..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-24 py-2.5 bg-slate-100/90 hover:bg-slate-100 border border-slate-200/90 rounded-xl text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-100/60 transition shadow-inner"
+              className="w-full pl-10 pr-24 py-2.5 bg-[#F5F7FA] hover:bg-[#EFF2F6] border border-[#E5E7EB] rounded-xl text-xs text-[#111827] placeholder-[#9CA3AF] focus:outline-none focus:bg-white focus:border-[#2563EB] focus:ring-4 focus:ring-blue-100 transition-all"
             />
-            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 pointer-events-none" />
+            <Search className="w-4 h-4 text-[#9CA3AF] absolute left-3.5 pointer-events-none" />
             <button
               type="submit"
-              className="absolute right-1.5 px-3.5 py-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg text-[11px] font-bold transition shadow-sm"
+              className="absolute right-1.5 px-4 py-1.5 bg-[#2563EB] hover:bg-[#1D4ED8] text-white rounded-lg text-xs font-semibold transition-colors"
             >
               Tìm kiếm
             </button>
           </div>
         </form>
 
-        {/* Navigation Actions */}
+        {/* Right Action Icons: Compare, Cart & Unified Account */}
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Quick Compare Button */}
           <Link
             href="/compare"
-            className="hidden sm:flex items-center gap-1.5 px-3 py-2 text-slate-700 hover:text-blue-600 hover:bg-slate-100/80 rounded-xl transition text-xs font-semibold"
-            title="So sánh thông số máy"
+            className="hidden sm:flex items-center gap-1.5 px-3 py-2 text-[#4B5563] hover:text-[#2563EB] hover:bg-[#F5F7FA] rounded-xl transition text-xs font-medium"
+            title="So sánh sản phẩm"
           >
             <div className="relative">
-              <Scale className="w-4 h-4 text-slate-600" />
+              <Scale className="w-4 h-4 text-[#4B5563]" />
               {compareCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-blue-600 text-white text-[10px] font-black rounded-full w-4 h-4 flex items-center justify-center">
+                <span className="absolute -top-2 -right-2 bg-[#2563EB] text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
                   {compareCount}
                 </span>
               )}
@@ -209,47 +218,47 @@ export default function Navbar() {
             <span>So sánh</span>
           </Link>
 
-          {/* Cart Button (Rõ nét, badge đỏ nổi bật) */}
+          {/* Cart Button */}
           <Link
             href="/cart"
-            className="flex items-center gap-2 px-3 py-2 bg-slate-100/90 hover:bg-blue-50 text-slate-800 hover:text-blue-700 rounded-xl transition border border-slate-200/70 relative group"
+            className="flex items-center gap-2 px-3 py-2 bg-[#F5F7FA] hover:bg-blue-50 text-[#111827] hover:text-[#2563EB] rounded-xl transition border border-[#E5E7EB] relative group"
             title="Xem giỏ hàng"
           >
             <div className="relative">
-              <ShoppingCart className="w-5 h-5 text-slate-800 group-hover:text-blue-600 transition" />
+              <ShoppingCart className="w-4 h-4 text-[#111827] group-hover:text-[#2563EB] transition-colors" />
               {cartCount > 0 && (
-                <span className="absolute -top-3 -right-3 bg-red-600 text-white text-[11px] font-black rounded-full min-w-[20px] h-5 px-1.5 flex items-center justify-center shadow-md border-2 border-white animate-scale">
+                <span className="absolute -top-3 -right-3 bg-[#EF4444] text-white text-[11px] font-bold rounded-full min-w-[20px] h-5 px-1.5 flex items-center justify-center border-2 border-white">
                   {cartCount}
                 </span>
               )}
             </div>
-            <span className="hidden sm:inline text-xs font-bold">Giỏ hàng</span>
+            <span className="hidden sm:inline text-xs font-semibold">Giỏ hàng</span>
           </Link>
 
-          {/* Unified Account Dropdown Menu (Gộp Đăng nhập & Đăng ký thành 1 menu gọn gàng) */}
+          {/* User Account Button & Dropdown */}
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-              className="flex items-center gap-1.5 px-3 py-2 bg-slate-100/90 hover:bg-slate-200/80 text-slate-800 rounded-xl transition border border-slate-200/70 text-xs font-bold"
+              className="flex items-center gap-1.5 px-3 py-2 bg-[#F5F7FA] hover:bg-[#EFF2F6] text-[#111827] rounded-xl transition border border-[#E5E7EB] text-xs font-semibold"
             >
-              <div className="w-5 h-5 rounded-full bg-slate-800 text-white flex items-center justify-center text-[10px] font-bold">
+              <div className="w-5 h-5 rounded-full bg-[#111827] text-white flex items-center justify-center text-[10px] font-bold">
                 {user ? (user.fullName ? user.fullName.charAt(0).toUpperCase() : 'U') : <UserIcon className="w-3.5 h-3.5" />}
               </div>
               <span className="hidden sm:inline max-w-[90px] truncate">
                 {user ? (user.fullName || user.email.split('@')[0]) : 'Tài khoản'}
               </span>
-              <ChevronDown className="w-3.5 h-3.5 text-slate-500" />
+              <ChevronDown className="w-3.5 h-3.5 text-[#9CA3AF]" />
             </button>
 
-            {/* Dropdown Box */}
+            {/* Account Dropdown Menu */}
             {userDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-slate-200/90 py-2 z-50 animate-in fade-in zoom-in-95 duration-150">
+              <div className="absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-[#E5E7EB] py-2 z-50 animate-in fade-in zoom-in-95 duration-150">
                 {user ? (
                   <>
-                    <div className="px-4 py-3 border-b border-slate-100 bg-slate-50/70 rounded-t-xl">
-                      <p className="text-xs font-black text-slate-900 truncate">{user.fullName}</p>
-                      <p className="text-[11px] text-slate-500 truncate">{user.email}</p>
-                      <span className="inline-block mt-1 text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-200/60 uppercase">
+                    <div className="px-4 py-3 border-b border-[#F3F4F6] bg-[#F9FAFB] rounded-t-xl">
+                      <p className="text-xs font-bold text-[#111827] truncate">{user.fullName}</p>
+                      <p className="text-[11px] text-[#6B7280] truncate">{user.email}</p>
+                      <span className="inline-block mt-1 text-[10px] font-semibold text-[#2563EB] bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
                         {user.role === 'ADMIN' ? 'Quản trị viên' : 'Khách hàng thân thiết'}
                       </span>
                     </div>
@@ -258,9 +267,9 @@ export default function Navbar() {
                       <Link
                         href="/portal"
                         onClick={() => setUserDropdownOpen(false)}
-                        className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold text-purple-700 bg-purple-50 hover:bg-purple-100 transition"
+                        className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-semibold text-[#6D28D9] bg-purple-50 hover:bg-purple-100 transition"
                       >
-                        <ShieldAlert className="w-4 h-4 text-purple-600" />
+                        <ShieldAlert className="w-4 h-4 text-[#6D28D9]" />
                         <span>Cổng Quản Trị Hệ Thống</span>
                       </Link>
                     )}
@@ -268,75 +277,75 @@ export default function Navbar() {
                     <Link
                       href="/tai-khoan"
                       onClick={() => setUserDropdownOpen(false)}
-                      className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition"
+                      className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-medium text-[#374151] hover:bg-[#F9FAFB] hover:text-[#2563EB] transition"
                     >
-                      <UserIcon className="w-4 h-4 text-slate-400" />
+                      <UserIcon className="w-4 h-4 text-[#9CA3AF]" />
                       <span>Thông tin tài khoản & Sổ địa chỉ</span>
                     </Link>
 
                     <Link
                       href="/don-hang-cua-toi"
                       onClick={() => setUserDropdownOpen(false)}
-                      className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition"
+                      className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-medium text-[#374151] hover:bg-[#F9FAFB] hover:text-[#2563EB] transition"
                     >
-                      <Package className="w-4 h-4 text-slate-400" />
+                      <Package className="w-4 h-4 text-[#9CA3AF]" />
                       <span>Lịch sử đơn hàng</span>
                     </Link>
 
-                    <div className="border-t border-slate-100 my-1" />
+                    <div className="border-t border-[#F3F4F6] my-1" />
 
                     <button
                       onClick={() => {
                         setUserDropdownOpen(false);
                         logout();
                       }}
-                      className="w-full flex items-center gap-2.5 px-4 py-2 text-xs font-bold text-red-600 hover:bg-red-50 transition"
+                      className="w-full flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-[#EF4444] hover:bg-red-50 transition"
                     >
-                      <LogOut className="w-4 h-4 text-red-500" />
+                      <LogOut className="w-4 h-4 text-[#EF4444]" />
                       <span>Đăng xuất</span>
                     </button>
                   </>
                 ) : (
                   <div className="p-3 space-y-3">
-                    <div className="text-center pb-2 border-b border-slate-100">
-                      <p className="text-xs font-bold text-slate-900">Chào mừng bạn đến với TechStore</p>
-                      <p className="text-[11px] text-slate-500 mt-0.5">Đăng nhập để theo dõi đơn hàng & ưu đãi</p>
+                    <div className="text-center pb-2 border-b border-[#F3F4F6]">
+                      <p className="text-xs font-bold text-[#111827]">Chào mừng bạn đến với TechStore</p>
+                      <p className="text-[11px] text-[#6B7280] mt-0.5">Đăng nhập để theo dõi đơn hàng & tích điểm</p>
                     </div>
 
                     <Link
                       href="/login"
                       onClick={() => setUserDropdownOpen(false)}
-                      className="block w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-center font-bold text-xs rounded-xl shadow transition"
+                      className="block w-full py-2.5 bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-center font-bold text-xs rounded-xl transition"
                     >
-                      Đăng Nhập Ngay
+                      Đăng Nhập
                     </Link>
 
-                    <div className="text-center text-xs text-slate-600">
+                    <div className="text-center text-xs text-[#6B7280]">
                       <span>Chưa có tài khoản? </span>
                       <Link
                         href="/register"
                         onClick={() => setUserDropdownOpen(false)}
-                        className="font-bold text-blue-600 hover:underline"
+                        className="font-bold text-[#2563EB] hover:underline"
                       >
-                        Đăng ký miễn phí
+                        Đăng ký ngay
                       </Link>
                     </div>
 
-                    <div className="border-t border-slate-100 pt-2 space-y-1 text-xs">
+                    <div className="border-t border-[#F3F4F6] pt-2 space-y-1 text-xs">
                       <Link
                         href="/tra-cuu-don-hang"
                         onClick={() => setUserDropdownOpen(false)}
-                        className="flex items-center gap-2 px-2 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition"
+                        className="flex items-center gap-2 px-2 py-1.5 rounded-lg text-[#4B5563] hover:bg-[#F9FAFB] hover:text-[#2563EB] transition"
                       >
-                        <Truck className="w-3.5 h-3.5 text-slate-400" />
-                        <span>Tra cứu vận đơn (không cần đăng nhập)</span>
+                        <Truck className="w-3.5 h-3.5 text-[#9CA3AF]" />
+                        <span>Tra cứu vận đơn (không cần login)</span>
                       </Link>
                       <Link
                         href="/tra-cuu-bao-hanh"
                         onClick={() => setUserDropdownOpen(false)}
-                        className="flex items-center gap-2 px-2 py-1.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition"
+                        className="flex items-center gap-2 px-2 py-1.5 rounded-lg text-[#4B5563] hover:bg-[#F9FAFB] hover:text-[#2563EB] transition"
                       >
-                        <ShieldCheck className="w-3.5 h-3.5 text-slate-400" />
+                        <ShieldCheck className="w-3.5 h-3.5 text-[#9CA3AF]" />
                         <span>Tra cứu bảo hành theo Serial/IMEI</span>
                       </Link>
                     </div>
@@ -349,7 +358,7 @@ export default function Navbar() {
           {/* Mobile Menu Toggle Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition"
+            className="md:hidden p-2 text-[#4B5563] hover:text-[#111827] hover:bg-[#F5F7FA] rounded-xl transition"
             aria-label="Mở menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -357,10 +366,12 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* 3. SUBNAV CATEGORY BAR & MEGA-MENU FLYOUT */}
-      <div className="border-t border-slate-100 bg-white/80 py-2 hidden sm:block relative">
+      {/* ============================================================== */}
+      {/* C. NAVIGATION MENU (Clean White Horizontal Bar) */}
+      {/* ============================================================== */}
+      <div className="border-t border-[#E5E7EB] bg-white py-2 hidden sm:block relative">
         <div className="container mx-auto px-4 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             {/* Mega-Menu Trigger Button */}
             <div
               className="relative"
@@ -369,44 +380,44 @@ export default function Navbar() {
             >
               <button
                 onClick={() => setMegaMenuOpen(!megaMenuOpen)}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-xl font-bold text-xs transition border ${
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg font-bold text-xs transition border ${
                   megaMenuOpen
-                    ? 'bg-slate-950 text-white border-slate-950'
-                    : 'bg-slate-100 hover:bg-slate-200/90 text-slate-800 border-slate-200'
+                    ? 'bg-[#111827] text-white border-[#111827]'
+                    : 'bg-[#F5F7FA] hover:bg-[#EFF2F6] text-[#111827] border-[#E5E7EB]'
                 }`}
               >
-                <LayoutGrid className="w-4 h-4 text-blue-600" />
-                <span>Danh Mục Sản Phẩm</span>
+                <LayoutGrid className="w-4 h-4 text-[#2563EB]" />
+                <span>Tất Cả Danh Mục</span>
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${megaMenuOpen ? 'rotate-180' : ''}`} />
               </button>
 
-              {/* Mega-Menu Flyout (Bung ra phân cấp đẹp mắt khi hover) */}
+              {/* Mega-Menu Flyout */}
               {megaMenuOpen && (
                 <div
-                  className="absolute left-0 top-full mt-2 w-[780px] bg-white rounded-3xl shadow-2xl border border-slate-200/90 p-6 z-50 animate-in fade-in zoom-in-95 duration-150"
+                  className="absolute left-0 top-full mt-2 w-[760px] bg-white rounded-2xl shadow-xl border border-[#E5E7EB] p-6 z-50 animate-in fade-in zoom-in-95 duration-150"
                   onMouseLeave={() => setMegaMenuOpen(false)}
                 >
-                  <div className="grid grid-cols-3 gap-6 pb-5 border-b border-slate-100">
+                  <div className="grid grid-cols-3 gap-6 pb-5 border-b border-[#F3F4F6]">
                     {/* Cột 1: Điện thoại & Laptop */}
                     <div className="space-y-4">
                       <div>
-                        <div className="flex items-center gap-2 text-xs font-black uppercase text-blue-600 mb-2">
+                        <div className="flex items-center gap-2 text-xs font-bold uppercase text-[#2563EB] mb-2">
                           <Smartphone className="w-4 h-4" />
                           <span>Điện Thoại & Tablet</span>
                         </div>
-                        <ul className="space-y-1.5 text-xs text-slate-600">
+                        <ul className="space-y-1.5 text-xs text-[#4B5563]">
                           <li>
-                            <Link href="/products?brandSlug=apple" className="hover:text-blue-600 transition font-medium">
-                              iPhone 16 Series Chính Hãng
+                            <Link href="/products?brandSlug=apple" className="hover:text-[#2563EB] transition">
+                              iPhone 16 Series VN/A
                             </Link>
                           </li>
                           <li>
-                            <Link href="/products?brandSlug=samsung" className="hover:text-blue-600 transition font-medium">
+                            <Link href="/products?brandSlug=samsung" className="hover:text-[#2563EB] transition">
                               Samsung Galaxy S24 Ultra AI
                             </Link>
                           </li>
                           <li>
-                            <Link href="/products?categoryId=dien-thoai-tablet" className="hover:text-blue-600 transition font-medium">
+                            <Link href="/products?categoryId=dien-thoai-tablet" className="hover:text-[#2563EB] transition">
                               iPad Pro M4 Tandem OLED
                             </Link>
                           </li>
@@ -414,18 +425,18 @@ export default function Navbar() {
                       </div>
 
                       <div>
-                        <div className="flex items-center gap-2 text-xs font-black uppercase text-blue-600 mb-2">
+                        <div className="flex items-center gap-2 text-xs font-bold uppercase text-[#2563EB] mb-2">
                           <Laptop className="w-4 h-4" />
                           <span>Laptop Gaming & Đồ Họa</span>
                         </div>
-                        <ul className="space-y-1.5 text-xs text-slate-600">
+                        <ul className="space-y-1.5 text-xs text-[#4B5563]">
                           <li>
-                            <Link href="/products?brandSlug=asus-rog" className="hover:text-blue-600 transition font-medium">
-                              ASUS ROG Zephyrus G16 OLED
+                            <Link href="/products?brandSlug=asus-rog" className="hover:text-[#2563EB] transition">
+                              ASUS ROG Zephyrus G16
                             </Link>
                           </li>
                           <li>
-                            <Link href="/products?brandSlug=apple" className="hover:text-blue-600 transition font-medium">
+                            <Link href="/products?brandSlug=apple" className="hover:text-[#2563EB] transition">
                               MacBook Pro 14 M3 Pro
                             </Link>
                           </li>
@@ -436,23 +447,23 @@ export default function Navbar() {
                     {/* Cột 2: Điện lạnh & Gia dụng */}
                     <div className="space-y-4">
                       <div>
-                        <div className="flex items-center gap-2 text-xs font-black uppercase text-blue-600 mb-2">
+                        <div className="flex items-center gap-2 text-xs font-bold uppercase text-[#2563EB] mb-2">
                           <Refrigerator className="w-4 h-4" />
                           <span>Điện Lạnh Inverter</span>
                         </div>
-                        <ul className="space-y-1.5 text-xs text-slate-600">
+                        <ul className="space-y-1.5 text-xs text-[#4B5563]">
                           <li>
-                            <Link href="/products?brandSlug=daikin" className="hover:text-blue-600 transition font-medium">
+                            <Link href="/products?brandSlug=daikin" className="hover:text-[#2563EB] transition">
                               Điều Hòa Daikin Inverter 1.5 HP
                             </Link>
                           </li>
                           <li>
-                            <Link href="/products?brandSlug=panasonic" className="hover:text-blue-600 transition font-medium">
+                            <Link href="/products?brandSlug=panasonic" className="hover:text-[#2563EB] transition">
                               Máy Giặt Sấy Panasonic 10.5kg
                             </Link>
                           </li>
                           <li>
-                            <Link href="/products?brandSlug=lg" className="hover:text-blue-600 transition font-medium">
+                            <Link href="/products?brandSlug=lg" className="hover:text-[#2563EB] transition">
                               Tủ Lạnh LG InstaView 617L
                             </Link>
                           </li>
@@ -460,18 +471,18 @@ export default function Navbar() {
                       </div>
 
                       <div>
-                        <div className="flex items-center gap-2 text-xs font-black uppercase text-blue-600 mb-2">
+                        <div className="flex items-center gap-2 text-xs font-bold uppercase text-[#2563EB] mb-2">
                           <Zap className="w-4 h-4" />
-                          <span>Gia Dụng Bếp Thông Minh</span>
+                          <span>Gia Dụng Bếp</span>
                         </div>
-                        <ul className="space-y-1.5 text-xs text-slate-600">
+                        <ul className="space-y-1.5 text-xs text-[#4B5563]">
                           <li>
-                            <Link href="/products?brandSlug=philips" className="hover:text-blue-600 transition font-medium">
+                            <Link href="/products?brandSlug=philips" className="hover:text-[#2563EB] transition">
                               Nồi Chiên Philips XXL 7.2L
                             </Link>
                           </li>
                           <li>
-                            <Link href="/products?brandSlug=bosch" className="hover:text-blue-600 transition font-medium">
+                            <Link href="/products?brandSlug=bosch" className="hover:text-[#2563EB] transition">
                               Máy Rửa Bát Bosch Series 6
                             </Link>
                           </li>
@@ -482,18 +493,18 @@ export default function Navbar() {
                     {/* Cột 3: Tivi & Smart Home */}
                     <div className="space-y-4">
                       <div>
-                        <div className="flex items-center gap-2 text-xs font-black uppercase text-blue-600 mb-2">
+                        <div className="flex items-center gap-2 text-xs font-bold uppercase text-[#2563EB] mb-2">
                           <Tv className="w-4 h-4" />
-                          <span>Tivi & Âm Thanh Cao Cấp</span>
+                          <span>Tivi & Âm Thanh</span>
                         </div>
-                        <ul className="space-y-1.5 text-xs text-slate-600">
+                        <ul className="space-y-1.5 text-xs text-[#4B5563]">
                           <li>
-                            <Link href="/products?brandSlug=sony" className="hover:text-blue-600 transition font-medium">
-                              Smart Tivi Sony Bravia OLED 4K
+                            <Link href="/products?brandSlug=sony" className="hover:text-[#2563EB] transition">
+                              Smart Tivi Sony OLED Bravia 4K
                             </Link>
                           </li>
                           <li>
-                            <Link href="/products?brandSlug=sony" className="hover:text-blue-600 transition font-medium">
+                            <Link href="/products?brandSlug=sony" className="hover:text-[#2563EB] transition">
                               Loa Soundbar Sony 7.1.2 Atmos
                             </Link>
                           </li>
@@ -501,18 +512,18 @@ export default function Navbar() {
                       </div>
 
                       <div>
-                        <div className="flex items-center gap-2 text-xs font-black uppercase text-blue-600 mb-2">
+                        <div className="flex items-center gap-2 text-xs font-bold uppercase text-[#2563EB] mb-2">
                           <Sparkles className="w-4 h-4" />
                           <span>Nhà Thông Minh & Robot</span>
                         </div>
-                        <ul className="space-y-1.5 text-xs text-slate-600">
+                        <ul className="space-y-1.5 text-xs text-[#4B5563]">
                           <li>
-                            <Link href="/products?brandSlug=ecovacs" className="hover:text-blue-600 transition font-medium">
+                            <Link href="/products?brandSlug=ecovacs" className="hover:text-[#2563EB] transition">
                               Robot Hút Bụi Ecovacs T30 Pro
                             </Link>
                           </li>
                           <li>
-                            <Link href="/products?brandSlug=dyson" className="hover:text-blue-600 transition font-medium">
+                            <Link href="/products?brandSlug=dyson" className="hover:text-[#2563EB] transition">
                               Máy Lọc Không Khí Dyson HP07
                             </Link>
                           </li>
@@ -522,16 +533,16 @@ export default function Navbar() {
                   </div>
 
                   {/* Mega-Menu Bottom Promo Banner */}
-                  <div className="mt-4 pt-3 flex items-center justify-between text-xs">
-                    <span className="font-semibold text-slate-600">
-                      🎁 Thu cũ đổi mới trợ giá đến <strong>2 Triệu</strong> · Giao hàng siêu tốc 2H
+                  <div className="mt-4 pt-3 flex items-center justify-between text-xs text-[#4B5563]">
+                    <span>
+                      Cam kết 100% chính hãng · Giao hàng siêu tốc 2H · 1 đổi 1 trong 30 ngày
                     </span>
                     <Link
                       href="/products"
                       onClick={() => setMegaMenuOpen(false)}
-                      className="font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1"
+                      className="font-bold text-[#2563EB] hover:text-[#1D4ED8] flex items-center gap-1"
                     >
-                      <span>Xem toàn bộ 24+ sản phẩm</span>
+                      <span>Khám phá toàn bộ 42 sản phẩm</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   </div>
@@ -539,110 +550,88 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* Quick Category Pills */}
-            <div className="flex items-center gap-1 overflow-x-auto text-xs font-semibold text-slate-700 scrollbar-none">
-              {QUICK_CATEGORIES.map((cat, idx) => (
+            {/* Clean Horizontal Links */}
+            <nav className="flex items-center gap-1 overflow-x-auto text-xs font-semibold text-[#4B5563] scrollbar-none">
+              {NAV_LINKS.map((link, idx) => (
                 <Link
                   key={idx}
-                  href={`/products?categoryId=${cat.slug}`}
-                  className="px-3 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition whitespace-nowrap"
+                  href={link.href}
+                  className="px-3 py-1.5 rounded-lg hover:text-[#2563EB] hover:bg-[#F5F7FA] transition whitespace-nowrap"
                 >
-                  {cat.name}
+                  {link.name}
                 </Link>
               ))}
-            </div>
+            </nav>
           </div>
 
-          {/* Deal Sốc Hôm Nay (Nổi bật, có badge lửa nhấp nháy thu hút sự chú ý) */}
-          <div className="flex items-center gap-2 shrink-0">
+          {/* Khuyến Mãi (Clean Red Accent Button) */}
+          <div className="flex items-center shrink-0">
             <Link
               href="/products"
-              className="group relative flex items-center gap-2 bg-gradient-to-r from-red-600 via-rose-600 to-amber-500 hover:from-red-700 hover:to-amber-600 text-white px-3.5 py-1.5 rounded-xl transition-all shadow-md shadow-red-500/20 active:scale-95 font-black text-xs"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-[#EF4444] bg-red-50 hover:bg-red-100 transition border border-red-200"
             >
-              <Flame className="w-4 h-4 fill-amber-300 text-amber-300 animate-bounce" />
-              <span>DEAL SỐC HÔM NAY</span>
-              <span className="bg-white/20 text-[10px] font-bold px-1.5 py-0.2 rounded-md uppercase">
-                HOT
-              </span>
+              <Tag className="w-3.5 h-3.5" />
+              <span>Khuyến Mãi Hot</span>
             </Link>
           </div>
         </div>
       </div>
 
-      {/* 4. MOBILE MENU POPUP */}
+      {/* ============================================================== */}
+      {/* MOBILE DRAWER */}
+      {/* ============================================================== */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-slate-200 bg-white px-4 py-4 space-y-4 animate-in slide-in-from-top-2 duration-200">
+        <div className="md:hidden border-t border-[#E5E7EB] bg-white p-4 space-y-4 animate-in slide-in-from-top-2 duration-150">
           <form onSubmit={handleSearch} className="relative">
             <input
               type="text"
-              placeholder="Tìm kiếm sản phẩm, thương hiệu..."
+              placeholder="Tìm kiếm sản phẩm..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-16 py-2.5 bg-slate-100 border border-slate-200 rounded-xl text-xs"
+              className="w-full pl-9 pr-4 py-2 bg-[#F5F7FA] border border-[#E5E7EB] rounded-xl text-xs text-[#111827] focus:outline-none focus:border-[#2563EB]"
             />
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
-            <button
-              type="submit"
-              className="absolute right-1.5 top-1.5 px-3 py-1 bg-slate-900 text-white text-xs rounded-lg font-bold"
-            >
-              Tìm
-            </button>
+            <Search className="w-4 h-4 text-[#9CA3AF] absolute left-3 top-2.5" />
           </form>
 
-          <nav className="flex flex-col space-y-1.5 text-xs font-bold text-slate-700">
-            <Link
-              href="/products"
-              onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-2.5 rounded-xl hover:bg-slate-100 flex items-center justify-between"
-            >
-              <span className="flex items-center gap-2">
-                <LayoutGrid className="w-4 h-4 text-blue-600" />
-                <span>Tất cả sản phẩm</span>
-              </span>
-              <span className="text-[11px] text-blue-600">Xem ngay &rarr;</span>
-            </Link>
+          <nav className="grid grid-cols-2 gap-2 text-xs font-semibold text-[#374151]">
+            {NAV_LINKS.map((link, idx) => (
+              <Link
+                key={idx}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2.5 rounded-lg bg-[#F9FAFB] hover:bg-blue-50 hover:text-[#2563EB] transition"
+              >
+                {link.name}
+              </Link>
+            ))}
+          </nav>
 
-            <Link
-              href="/products"
-              onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-2.5 rounded-xl bg-red-50 text-red-600 hover:bg-red-100 flex items-center justify-between"
-            >
-              <span className="flex items-center gap-2">
-                <Flame className="w-4 h-4 fill-red-600" />
-                <span>Deal Sốc Hôm Nay</span>
-              </span>
-              <span className="bg-red-600 text-white text-[10px] px-1.5 py-0.5 rounded">Giảm 50%</span>
-            </Link>
-
-            <Link
-              href="/compare"
-              onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-2.5 rounded-xl hover:bg-slate-100 flex items-center justify-between"
-            >
-              <span>So sánh sản phẩm</span>
-              {compareCount > 0 && (
-                <span className="bg-blue-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">
-                  {compareCount}
-                </span>
-              )}
-            </Link>
-
+          <div className="border-t border-[#F3F4F6] pt-3 flex flex-col gap-2 text-xs">
             <Link
               href="/tra-cuu-bao-hanh"
               onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-2.5 rounded-xl hover:bg-slate-100"
+              className="flex items-center gap-2 text-[#4B5563] hover:text-[#2563EB]"
             >
-              Tra cứu bảo hành điện tử
+              <ShieldCheck className="w-4 h-4 text-[#16A34A]" />
+              <span>Tra cứu bảo hành theo Serial/IMEI</span>
             </Link>
-
             <Link
               href="/tra-cuu-don-hang"
               onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-2.5 rounded-xl hover:bg-slate-100"
+              className="flex items-center gap-2 text-[#4B5563] hover:text-[#2563EB]"
             >
-              Tra cứu vận đơn GHN / GHTK
+              <Truck className="w-4 h-4 text-[#2563EB]" />
+              <span>Tra cứu lộ trình đơn hàng</span>
             </Link>
-          </nav>
+            <Link
+              href="/compare"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2 text-[#4B5563] hover:text-[#2563EB]"
+            >
+              <Scale className="w-4 h-4 text-[#F59E0B]" />
+              <span>So sánh thông số máy ({compareCount})</span>
+            </Link>
+          </div>
         </div>
       )}
     </header>
