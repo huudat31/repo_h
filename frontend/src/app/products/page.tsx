@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 import { fetchApi } from '@/lib/api';
+import { CURATED_PRODUCTS } from '@/lib/curated-products';
 import { Filter, Zap, RotateCcw, Package, FolderTree, Tag, Sparkles } from 'lucide-react';
 
 export const metadata = {
@@ -28,13 +29,39 @@ async function getProductsData(params: {
     qs.append('limit', '50');
 
     const res = await fetchApi<{ data: any[] }>(`/products?${qs.toString()}`);
-    if (res && res.data) {
+    if (res && res.data && res.data.length > 0) {
       return res.data;
     }
   } catch {
     // fallback
   }
-  return [];
+
+  // Graceful fallback from CURATED_PRODUCTS
+  let filtered = [...CURATED_PRODUCTS];
+  if (params.search) {
+    const s = params.search.toLowerCase();
+    filtered = filtered.filter(
+      (p) => p.name.toLowerCase().includes(s) || p.slug.includes(s)
+    );
+  }
+  if (params.categoryId) {
+    filtered = filtered.filter((p) => p.category?.slug === params.categoryId);
+  }
+  if (params.brandSlug) {
+    filtered = filtered.filter((p) => p.brand?.slug === params.brandSlug);
+  }
+  if (params.hasInverter) {
+    filtered = filtered.filter((p) => p.specs?.inverter);
+  }
+  if (params.minPrice) {
+    const min = Number(params.minPrice);
+    filtered = filtered.filter((p) => p.price >= min);
+  }
+  if (params.maxPrice) {
+    const max = Number(params.maxPrice);
+    filtered = filtered.filter((p) => p.price <= max);
+  }
+  return filtered;
 }
 
 const CATEGORIES = [

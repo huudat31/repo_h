@@ -10,6 +10,7 @@ import Product360Viewer from '@/components/product-detail/Product360Viewer';
 import AccessoryBundleCard from '@/components/product-detail/AccessoryBundleCard';
 import ReviewsSection from '@/components/product-detail/ReviewsSection';
 import { ShieldCheck, Truck, RotateCcw, Zap, CheckCircle2, Box, FileText, PhoneCall } from 'lucide-react';
+import { CURATED_PRODUCTS } from '@/lib/curated-products';
 
 const FALLBACK_DETAIL_DATA: Record<string, any> = {
   'may-giat-say-panasonic-inverter-10kg': {
@@ -87,11 +88,13 @@ const FALLBACK_DETAIL_DATA: Record<string, any> = {
 async function getProductDetail(slug: string) {
   try {
     const res = await fetchApi<any>(`/products/slug/${slug}`);
-    if (res) return res;
+    if (res && res.id) return res;
   } catch {
     // fallback
   }
-  return FALLBACK_DETAIL_DATA[slug] || FALLBACK_DETAIL_DATA['may-giat-say-panasonic-inverter-10kg'];
+  const curated = CURATED_PRODUCTS.find((p) => p.slug === slug);
+  if (curated) return curated;
+  return FALLBACK_DETAIL_DATA[slug] || CURATED_PRODUCTS[0];
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
