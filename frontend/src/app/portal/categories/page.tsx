@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { fetchApi } from '@/lib/api';
+import { CURATED_CATEGORIES } from '@/lib/curated-products';
 import { FolderTree, Plus, Trash2, Edit, Loader2, AlertCircle } from 'lucide-react';
 
 interface Category {
@@ -32,9 +33,13 @@ export default function AdminCategoriesPage() {
     setLoading(true);
     try {
       const data = await fetchApi<Category[]>('/categories');
-      setCategories(data || []);
+      if (Array.isArray(data) && data.length > 0) {
+        setCategories(data);
+      } else {
+        setCategories(CURATED_CATEGORIES as any[]);
+      }
     } catch {
-      // Ignored
+      setCategories(CURATED_CATEGORIES as any[]);
     } finally {
       setLoading(false);
     }

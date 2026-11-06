@@ -348,6 +348,14 @@ export default function Navbar() {
                         <ShieldCheck className="w-3.5 h-3.5 text-[#9CA3AF]" />
                         <span>Tra cứu bảo hành theo Serial/IMEI</span>
                       </Link>
+                      <Link
+                        href="/portal"
+                        onClick={() => setUserDropdownOpen(false)}
+                        className="flex items-center gap-2 px-2 py-1.5 rounded-lg text-[#6B7280] hover:bg-purple-50 hover:text-[#6D28D9] transition font-medium"
+                      >
+                        <ShieldAlert className="w-3.5 h-3.5 text-[#9CA3AF]" />
+                        <span>Cổng quản trị hệ thống (Admin)</span>
+                      </Link>
                     </div>
                   </div>
                 )}
@@ -630,6 +638,14 @@ export default function Navbar() {
             >
               <Scale className="w-4 h-4 text-[#F59E0B]" />
               <span>So sánh thông số máy ({compareCount})</span>
+            </Link>
+            <Link
+              href="/portal"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2 text-[#6B7280] hover:text-[#2563EB] font-medium pt-1 border-t border-[#F3F4F6]"
+            >
+              <ShieldAlert className="w-4 h-4 text-[#9CA3AF]" />
+              <span>Cổng quản trị hệ thống (Admin)</span>
             </Link>
           </div>
         </div>

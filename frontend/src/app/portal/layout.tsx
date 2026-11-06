@@ -61,12 +61,24 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </p>
           </div>
 
-          <div className="flex flex-col gap-2 pt-2">
+          {/* Hộp thông tin tài khoản Admin Demo */}
+          <div className="bg-amber-50 border border-amber-200/80 rounded-xl p-3.5 text-left text-[11px] text-amber-900 space-y-1.5">
+            <div className="font-bold flex items-center gap-1.5 text-amber-800">
+              <ShieldCheck className="w-4 h-4 text-amber-600 shrink-0" />
+              <span>Tài khoản Quản Trị Hệ Thống (Demo / Test):</span>
+            </div>
+            <div className="font-mono bg-white/90 p-2 rounded-lg border border-amber-200/60 text-slate-700 space-y-0.5 text-[11px]">
+              <div>Email: <strong className="text-blue-600 font-bold">admin@techstore.vn</strong></div>
+              <div>Mật khẩu: <strong className="text-emerald-600 font-bold">Admin@123456</strong></div>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-2 pt-1">
             <Link
               href="/login?redirect=/portal"
               className="w-full py-2.5 bg-slate-900 hover:bg-blue-600 text-white font-bold text-xs rounded-lg shadow-sm transition"
             >
-              Đăng Nhập
+              Đăng Nhập Quản Trị Viên
             </Link>
             <Link
               href="/"

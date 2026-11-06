@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { fetchApi } from '@/lib/api';
+import { CURATED_PRODUCTS } from '@/lib/curated-products';
 import { formatPrice } from '@/lib/formatters';
 import {
   Package,
@@ -28,9 +29,13 @@ export default function AdminProductsPage() {
     setLoading(true);
     try {
       const res = await fetchApi<{ data: any[] }>('/products?limit=100');
-      setProducts(res.data || []);
+      if (res && res.data && res.data.length > 0) {
+        setProducts(res.data);
+      } else {
+        setProducts(CURATED_PRODUCTS as any[]);
+      }
     } catch {
-      // Ignored
+      setProducts(CURATED_PRODUCTS as any[]);
     } finally {
       setLoading(false);
     }

@@ -15,6 +15,20 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  async redirects() {
+    return [
+      {
+        source: '/admin',
+        destination: '/portal',
+        permanent: false,
+      },
+      {
+        source: '/admin/:path*',
+        destination: '/portal/:path*',
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

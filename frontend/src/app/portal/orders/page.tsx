@@ -26,6 +26,60 @@ const STATUS_TABS = [
   { key: 'CANCELLED', label: 'Đã Hủy' },
 ];
 
+const DEMO_ORDERS = [
+  {
+    id: 'demo-ord-1',
+    orderCode: 'TS-20261105-001',
+    recipientName: 'Trần Văn Hoàng',
+    recipientPhone: '0912 345 678',
+    shippingAddress: '125 Thái Hà, Trung Liệt, Đống Đa, Hà Nội',
+    paymentMethod: 'VNPAY',
+    paymentStatus: 'PAID',
+    finalAmount: 34490000,
+    shippingFee: 0,
+    status: 'PENDING',
+    createdAt: new Date().toISOString(),
+    assignedStaff: null,
+    items: [
+      { id: '1', productName: 'iPhone 16 Pro Max 256GB - Titan Tự Nhiên', quantity: 1, unitPrice: 34490000 },
+    ],
+  },
+  {
+    id: 'demo-ord-2',
+    orderCode: 'TS-20261105-002',
+    recipientName: 'Lê Minh Tuấn',
+    recipientPhone: '0988 765 432',
+    shippingAddress: '240 Nguyễn Thị Minh Khai, Phường 6, Quận 3, TP.HCM',
+    paymentMethod: 'MOMO',
+    paymentStatus: 'PAID',
+    finalAmount: 68990000,
+    shippingFee: 0,
+    status: 'CONFIRMED',
+    createdAt: new Date(Date.now() - 3600000).toISOString(),
+    assignedStaff: 'Nguyễn Văn Kho vận',
+    items: [
+      { id: '2', productName: 'Laptop ASUS ROG Zephyrus G16 OLED (Ultra 9 / RTX 4080)', quantity: 1, unitPrice: 68990000 },
+    ],
+  },
+  {
+    id: 'demo-ord-3',
+    orderCode: 'TS-20261105-003',
+    recipientName: 'Nguyễn Thị Hương',
+    recipientPhone: '0903 112 233',
+    shippingAddress: 'Tòa Landmark 81, Vinhomes Central Park, Bình Thạnh, TP.HCM',
+    paymentMethod: 'COD',
+    paymentStatus: 'PENDING',
+    finalAmount: 5490000,
+    shippingFee: 30000,
+    status: 'SHIPPING',
+    createdAt: new Date(Date.now() - 86400000).toISOString(),
+    assignedStaff: 'Đội Giao Hàng Siêu Tốc 2H',
+    items: [
+      { id: '3', productName: 'Tai Nghe Apple AirPods Pro 2 (Cổng Sạc USB-C)', quantity: 1, unitPrice: 5490000 },
+    ],
+  },
+];
+
 export default function AdminOrdersPage() {
   const [orders, setOrders] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -45,9 +99,15 @@ export default function AdminOrdersPage() {
     try {
       const url = activeStatus ? `/orders?status=${activeStatus}` : '/orders';
       const data = await fetchApi<any[]>(url);
-      setOrders(data || []);
+      if (Array.isArray(data) && data.length > 0) {
+        setOrders(data);
+      } else {
+        const filtered = activeStatus ? DEMO_ORDERS.filter((o) => o.status === activeStatus) : DEMO_ORDERS;
+        setOrders(filtered);
+      }
     } catch {
-      // Ignored
+      const filtered = activeStatus ? DEMO_ORDERS.filter((o) => o.status === activeStatus) : DEMO_ORDERS;
+      setOrders(filtered);
     } finally {
       setLoading(false);
     }

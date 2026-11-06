@@ -8,6 +8,7 @@ import {
   MapPin,
   RotateCcw,
   Lock,
+  ShieldAlert,
 } from 'lucide-react';
 
 export default function Footer() {
@@ -157,6 +158,12 @@ export default function Footer() {
                     Quản lý tài khoản & Sổ địa chỉ
                   </Link>
                 </li>
+                <li>
+                  <Link href="/portal" className="hover:text-[#2563EB] transition flex items-center gap-1.5 font-medium text-[#6B7280]">
+                    <ShieldAlert className="w-3.5 h-3.5 text-[#9CA3AF]" />
+                    <span>Cổng quản trị (Admin Portal)</span>
+                  </Link>
+                </li>
               </ul>
             </div>
 
@@ -201,6 +208,7 @@ export default function Footer() {
             <Link href="/compare" className="hover:text-[#2563EB] transition">So sánh</Link>
             <Link href="/tra-cuu-bao-hanh" className="hover:text-[#2563EB] transition">Bảo hành</Link>
             <Link href="/tra-cuu-don-hang" className="hover:text-[#2563EB] transition">Vận đơn</Link>
+            <Link href="/portal" className="hover:text-[#2563EB] transition font-medium">Quản trị</Link>
           </div>
         </div>
       </div>
